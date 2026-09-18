@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(forge --version)",
+      "Bash(forge test *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Read(//tmp/**)",
+      "Bash(echo \"EXITCODE=$?\")",
+      "Bash(forge build *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(command -v wsl.exe)",
+      "Bash(wsl.exe -e bash -lc \"which forge; forge --version\")"
+    ]
+  }
+}
