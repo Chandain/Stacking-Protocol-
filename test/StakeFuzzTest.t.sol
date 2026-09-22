@@ -59,4 +59,59 @@ contract StakingFuzzTest is Test {
         assertEq(userStake, stakeAmount - unstakeAmount);
         assertEq(rewardAmount, userReward);
     }
+
+    function testFuzz_UnstakeZero(uint256 _amount) public {
+        vm.startPrank(user);
+
+        uint256 amount = bound(_amount, 1, 100);
+
+        staking.stake{value: amount}(amount);
+
+        vm.warp(block.timestamp + 1 days);
+
+        vm.expectRevert(bytes("IA"));
+        staking.unstake(0);
+
+        vm.stopPrank();
+    }
+
+    function testFuzz_UnstakeStakeAmount(uint256 _amount) public {
+        vm.startPrank(user);
+
+        uint256 amount = bound(_amount, 1, 100);
+
+        staking.stake{value: amount}(amount);
+
+        (uint256 amountStakedBefore, ,) = staking.getInfo(user);
+
+        vm.warp(block.timestamp + 1 days);
+
+        staking.unstake(amount);
+
+        (uint256 amountStakedAfter, ,) = staking.getInfo(user);
+
+        uint256 amountUnstake = amountStakedBefore - amountStakedAfter;
+
+        assertEq(amountUnstake, amount);
+        console.log(amountUnstake, amount);
+
+        vm.stopPrank();
+    }
+
+    function testFuzz_UnstakeMoreThanStakeAMount(uint256 amount) public {
+        vm.startPrank(user);
+        
+        uint256 amountStake = bound(amount, 1, 100);
+        staking.stake{value: amountStake}(amountStake);
+
+        vm.warp(block.timestamp + 3 days);
+
+        uint256 amountUnstake = bound(amount, amountStake + 1, 1000);
+
+        vm.expectRevert(bytes("IB"));
+        staking.unstake(amountUnstake);
+
+        vm.stopPrank();
+    }
+
 }

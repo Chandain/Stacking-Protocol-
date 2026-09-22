@@ -5,28 +5,31 @@ import {Test, console} from "forge-std/Test.sol";
 import {Staking} from "../src/Staking.sol";
 
 contract StakingTest is Test {
-    address user = makeAddr("user");
+    address userA = makeAddr("userA");
+    address userB = makeAddr("userB");
     Staking public staking;
 
     uint256 period = 1 days;
 
     function setUp() public {
         staking = new Staking(period, 1);
-        vm.deal(user, 1000);
+        vm.deal(userA, 1000);
+        vm.deal(userB, 1000);
         vm.deal(address(staking), 10000);
     }
 
     function test_Stake() public {
-        vm.prank(user);
+        vm.prank(userA);
         staking.stake{value: 100}(100);
     } 
 
     function invariant_ContractCanCoverPrincipal() public {
         assertGe(address(staking).balance, staking.totalStake());
-    }   
+    }
+
 
     function testAmountUnstakeIsZero() public {
-        vm.startPrank(user);
+        vm.startPrank(userA);
 
         staking.stake{value: 10}(10);
 
@@ -37,7 +40,7 @@ contract StakingTest is Test {
     }
 
     function testUnstakeTotalStake() public {
-        vm.startPrank(user);
+        vm.startPrank(userA);
 
         uint256 amountStake = 10;
 
@@ -48,7 +51,7 @@ contract StakingTest is Test {
     }
 
     function testUnstakeMoreThanTotalStake() public {
-        vm.startPrank(user);
+        vm.startPrank(userA);
 
         uint256 amountStake = 10;
 
@@ -60,7 +63,7 @@ contract StakingTest is Test {
     }
 
     function testElapsedLessThanFullPeriod() public {
-        vm.startPrank(user);
+        vm.startPrank(userA);
 
         uint256 amountStake = 10;
 
@@ -68,38 +71,38 @@ contract StakingTest is Test {
 
         vm.warp(block.timestamp + period - 1);
 
-        uint256 amountReward = staking.earned(user);
+        uint256 amountReward = staking.earned(userA);
         staking.unstake(amountStake);
         vm.stopPrank();
 
-        (, uint256 userReward,) = staking.getInfo(user);
+        (, uint256 userAReward,) = staking.getInfo(userA);
 
-        assertEq(userReward, 0);
+        assertEq(userAReward, 0);
         assertEq(amountReward, 0);
 
     }
 
     function testClaimAfterPartialUnstake() public {
-        vm.startPrank(user);
+        vm.startPrank(userA);
 
         staking.stake{value: 10}(10);
 
         
         vm.warp(block.timestamp + 2 days);
-        uint256 rewardBeforeUnstake = staking.earned(user);
+        uint256 rewardBeforeUnstake = staking.earned(userA);
 
         staking.unstake(4);
         
         vm.warp(block.timestamp + 1 days);
 
-        uint256 rewardAfeterUnstake = staking.earned(user);
+        uint256 rewardAfeterUnstake = staking.earned(userA);
 
-        uint256 balanceBeforeClaim = address(user).balance;
+        uint256 balanceBeforeClaim = address(userA).balance;
         staking.claimReward();
-        uint256 balanceAfterClaim = address(user).balance;
+        uint256 balanceAfterClaim = address(userA).balance;
         vm.stopPrank();
 
-        (, uint256 rewardAfterClaim,) = staking.getInfo(user);
+        (, uint256 rewardAfterClaim,) = staking.getInfo(userA);
 
         console.log(rewardBeforeUnstake, rewardAfeterUnstake, balanceBeforeClaim, balanceAfterClaim);
         assertEq(rewardAfterClaim, 0);
@@ -108,24 +111,24 @@ contract StakingTest is Test {
 
     function testPartialUnstakeCheckpointsReward() public {
 
-        vm.prank(user);
+        vm.prank(userA);
         staking.stake{value: 10}(10);
 
         console.log(staking.checkAmountStake());
 
         vm.warp(block.timestamp + 2 days);
 
-        vm.prank(user);
+        vm.prank(userA);
         staking.unstake(4);
 
-        (uint256 stake, uint256 reward,) = staking.getInfo(user);
+        (uint256 stake, uint256 reward,) = staking.getInfo(userA);
 
         assertEq(stake, 6);
         assertEq(reward, 20);
     }
 
     function testCannotUnstakeMoreThanStake() public {
-        vm.startPrank(user);
+        vm.startPrank(userA);
 
         staking.stake{value: 10}(10);
 
@@ -137,25 +140,25 @@ contract StakingTest is Test {
     }
 
     function test_EarnRewardOverTime() public {
-        vm.prank(user);
+        vm.prank(userA);
         staking.stake{value: 100}(100);
 
         vm.warp(block.timestamp + 1 days);
 
-        uint256 reward = staking.earned(user);
+        uint256 reward = staking.earned(userA);
 
         assert(reward > 0);
     }
     
     function stakeAndWarp(uint256 amount, uint256 time) internal {
-        vm.prank(user);
+        vm.prank(userA);
         staking.stake{value: amount}(amount);
         vm.warp(block.timestamp + (time + 1));
     }
     function test_ClaimDoesNotChangePrincipal() public {
         stakeAndWarp(100, 1 days);
 
-        vm.startPrank(user);
+        vm.startPrank(userA);
         uint256 principalBeforeClaim = staking.checkAmountStake();
         
         staking.claimReward();
@@ -168,9 +171,9 @@ contract StakingTest is Test {
 
     function test_DoubleClaimDoesNotDoubleReward() public {
         stakeAndWarp(100, 1 days);
-        vm.startPrank(user);
+        vm.startPrank(userA);
         staking.claimReward();
-        uint256 rewardAfterClaim = staking.earned(user);
+        uint256 rewardAfterClaim = staking.earned(userA);
         vm.stopPrank();
 
         assertEq(rewardAfterClaim, 0);
@@ -179,15 +182,15 @@ contract StakingTest is Test {
     function test_UnstakeReturnsPrincipal() public {
         stakeAndWarp(100, 1 days);
 
-        vm.startPrank(user);
-        console.log("Balance before claim: ", address(user).balance);
-        uint256 rewardBeforeClaim = staking.earned(user);
+        vm.startPrank(userA);
+        console.log("Balance before claim: ", address(userA).balance);
+        uint256 rewardBeforeClaim = staking.earned(userA);
         staking.claimReward();
-        console.log("Balance after claim: ", address(user).balance);
-        uint256 balanceBeforeUnstake = address(user).balance;
+        console.log("Balance after claim: ", address(userA).balance);
+        uint256 balanceBeforeUnstake = address(userA).balance;
         console.log("Balance before unstake: ", balanceBeforeUnstake);
         staking.unstake(10);
-        uint256 balanceAfterUnstake = address(user).balance;
+        uint256 balanceAfterUnstake = address(userA).balance;
         console.log("Balance after unstake: ", balanceAfterUnstake);
         vm.stopPrank();
 
