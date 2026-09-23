@@ -42,7 +42,6 @@ contract Staking {
         totalStake += amount;
         info.stake += amount;
 
-        console.log(address(this).balance);
     }
 
     function getInfo(address user) public view returns (uint256 amountStake, uint256 reward, uint256 lastUpdate) {
