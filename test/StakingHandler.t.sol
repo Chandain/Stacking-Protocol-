@@ -52,16 +52,16 @@ contract StakingHandler is Test {
         uint256 balanceBefore = address(staking).balance;
         console.log("balanceBefore", balanceBefore);
 
-        console.log("totalStakeBefore", staking.totalStake());
+        // console.log("totalStakeBefore", staking.totalStake());
 
         uint256 pendingReward = staking.earned(actor);
-        console.log("pendingReward", pendingReward);
+        // console.log("pendingReward", pendingReward);
 
         (, uint256 storedReward, ) = staking.getInfo(actor);
-        console.log("storedReward", storedReward);
+        // console.log("storedReward", storedReward);
 
         uint256 expectedReward = storedReward + pendingReward;
-        console.log("expectedReward", expectedReward);
+        // console.log("expectedReward", expectedReward);
 
         if (expectedReward == 0) return;
 
@@ -70,21 +70,22 @@ contract StakingHandler is Test {
         staking.claimReward();
 
         uint256 balanceAfter = address(staking).balance;
-        console.log("balanceAfter", balanceAfter);
+        // console.log("balanceAfter", balanceAfter);
 
-        uint256 rewardAfter = staking.earned(actor);
-        console.log("rewardAfter", rewardAfter);
+        // uint256 rewardAfter = staking.earned(actor);
+        // console.log("rewardAfter", rewardAfter);
 
         uint256 rewardActuallyPaid = balanceBefore - balanceAfter;
-        console.log("rewardActuallyPaid", rewardActuallyPaid);
+        console.log("Claim", rewardActuallyPaid);
+        // console.log("rewardActuallyPaid", rewardActuallyPaid);
 
-        ghost_totalRewardsPaid += rewardActuallyPaid; 
-        console.log("totalStake after", staking.totalStake());
+        // ghost_totalRewardsPaid += rewardActuallyPaid; 
+        // console.log("totalStake after", staking.totalStake());
 
-        console.log("Deposited", ghost_totalDeposited);
-        console.log("PrincipalOut", ghost_totalPrincipalOut);
+        // console.log("Deposited", ghost_totalDeposited);
+        // console.log("PrincipalOut", ghost_totalPrincipalOut);
 
-        console.log("-------");
+        // console.log("-------");
 
         assertEq(rewardActuallyPaid, expectedReward);
     }

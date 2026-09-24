@@ -1,0 +1,3457 @@
+Compiling 2 files with Solc 0.8.20
+Solc 0.8.20 finished in 539.01ms
+Compiler run successful!
+
+Ran 1 test for test/StakeInvariantTest.t.sol:StakeInvariantTest
+[PASS] invariant_PrincipalAccounting() (runs: 256, calls: 128000, reverts: 17180)
+
+╭----------------+----------+-------+---------+----------╮
+| Contract       | Selector | Calls | Reverts | Discards |
++========================================================+
+| StakingHandler | claim    | 31987 | 16798   | 0        |
+|----------------+----------+-------+---------+----------|
+| StakingHandler | stake    | 32031 | 0       | 0        |
+|----------------+----------+-------+---------+----------|
+| StakingHandler | unstake  | 32030 | 382     | 0        |
+|----------------+----------+-------+---------+----------|
+| StakingHandler | warp     | 31952 | 0       | 0        |
+╰----------------+----------+-------+---------+----------╯
+
+Logs:
+  Claim 175
+  Claim 62
+  Claim 4487
+  Claim 9885
+  Claim 2030
+  Claim 16583
+  Claim 307
+  Claim 70
+  Claim 111
+  Claim 832
+  Claim 5024
+  Claim 4632
+  Claim 3332
+  Claim 22188
+  Claim 621
+  Claim 480
+  Claim 105
+  Claim 378
+  Claim 11836
+  Claim 12360
+  Claim 778
+  Claim 409
+  Claim 2464
+  Claim 230
+  Claim 49
+
+Traces:
+  [131280] StakingHandler::stake(1000, 1274)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [67426] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [16221] StakingHandler::unstake(14589119468454988 [1.458e16], 438687327225855 [4.386e14])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 0, 0
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(707)
+    ├─ [0] VM::warp(708)
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [71254] StakingHandler::unstake(293, 100000 [1e5])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 100, 0, 1
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(93)
+    │   ├─ [0] userA::fallback{value: 93}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(41174708187246021618907060113271021163387 [4.117e40])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 0, 0
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(3679500098633079358891448519570246722365140740035 [3.679e48])
+    ├─ [0] VM::warp(2212743 [2.212e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [43878] StakingHandler::claim(0)
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 175
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 7, 0, 708
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 175}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 175) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [80362] StakingHandler::stake(4967, 1989)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [50326] Staking::stake{value: 67}(67)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(3340)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 7, 0, 2160708 [2.16e6]
+    └─ ← [Stop]
+
+  [54154] StakingHandler::unstake(15538153756202197007153961837214905411708295624105 [1.553e49], 9025524253198229509845364 [9.025e24])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 7, 0, 2160708 [2.16e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(4)
+    │   ├─ [0] userA::fallback{value: 4}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(15816383801669176749841505727613942563696460362620298515167214941470528 [1.581e70])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 3, 0, 2212743 [2.212e6]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(6400, 100000 [1e5])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 3, 0, 2212743 [2.212e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userA::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(21219216233765422855089034056801535013837053328563205876811 [2.121e58])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 67, 0, 2212743 [2.212e6]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(2660, 2962)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 60}(60)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(122900 [1.229e5])
+    ├─ [0] VM::warp(2335643 [2.335e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [73933] StakingHandler::stake(7716, 8062)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 16}(16)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [46780] StakingHandler::stake(100, 2)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [49883] StakingHandler::unstake(2, 100000 [1e5])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 178, 62, 2335643 [2.335e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(2)
+    │   ├─ [0] userA::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(493, 2592000 [2.592e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 93}(93)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(347055637126863608757021431637379545931437190020940463431127888 [3.47e62], 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 269, 62, 2335643 [2.335e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(212)
+    │   ├─ [0] userA::fallback{value: 212}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48011] StakingHandler::stake(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77], 71225338713529356924916209580431131829437233480559885287142838 [7.122e61])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [73943] StakingHandler::stake(2495170751426192 [2.495e15], 2481469375072295736898779475627816153659805677 [2.481e45])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 92}(92)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(876809581 [8.768e8], 9940118099 [9.94e9])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 81}(81)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42896] StakingHandler::claim(1914)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 157, 62, 2335643 [2.335e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 62}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 62) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(60439597183514976308694601140372878 [6.043e34], 65534434395519046779387006441861088433937471166298872 [6.553e52])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 78}(78)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(31163047676053002284491149673592542335326003438665 [3.116e49])
+    ├─ [0] VM::warp(3982308 [3.982e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [73933] StakingHandler::stake(15242693309325455089523385339933333162517331362708868286057347 [1.524e61], 116)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 47}(47)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(33629679505783294421581226407285 [3.362e31], 16679006419651522853434815563581652802952323046720153066892802022 [1.667e64])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 282, 4465, 3982308 [3.982e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(139)
+    │   ├─ [0] userA::fallback{value: 139}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [59088] StakingHandler::unstake(0, 1)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 240, 67, 2335643 [2.335e6]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(1000, 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 143, 4465, 3982308 [3.982e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(142)
+    │   ├─ [0] userA::fallback{value: 142}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(3237)
+    ├─ [0] VM::warp(3985545 [3.985e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(14884991 [1.488e7])
+    ├─ [0] VM::warp(5910536 [5.91e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59564] StakingHandler::unstake(1128789337 [1.128e9], 591938503874247480036806619336512230549724 [5.919e41])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 1, 4465, 3982308 [3.982e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(1)
+    │   ├─ [0] userA::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42896] StakingHandler::claim(100)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 4487, 5910536 [5.91e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 4487}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 4487) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [60452] StakingHandler::stake(2569, 100)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 69}(69)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(1309999348797675053364521955972105410 [1.309e36], 140433408874228876716739749549838 [1.404e32])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 69, 0, 5910536 [5.91e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(11)
+    │   ├─ [0] userA::fallback{value: 11}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [56843] StakingHandler::stake(3838679986 [3.838e9], 3270314540568726618798634063738749322201 [3.27e39])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 86}(86)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(36721469 [3.672e7])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 325, 9885, 5910536 [5.91e6]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 9885}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 9885) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2592000 [2.592e6])
+    ├─ [0] VM::warp(8502536 [8.502e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(2419942671313932576950601301986 [2.419e30])
+    ├─ [0] VM::warp(8972522 [8.972e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [73933] StakingHandler::stake(54355801260332911965532914548982753034231529214 [5.435e46], 110241107418092394344155515432 [1.102e29])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 14}(14)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(2596735115564255040747186639556144288439952 [2.596e42], 278669693054351102345162579466049929724 [2.786e38])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 72, 2030, 8972522 [8.972e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(48)
+    │   ├─ [0] userA::fallback{value: 48}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(446, 2)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 24, 2030, 8972522 [8.972e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(14)
+    │   ├─ [0] userA::fallback{value: 14}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42896] StakingHandler::claim(304706039808779228702333622203511422 [3.047e35])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 10, 2030, 8972522 [8.972e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 2030}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 2030) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [73571] StakingHandler::stake(100000 [1e5], 4427)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(7596748 [7.596e6])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 10, 0, 8972522 [8.972e6]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(799101551991668646453534331350348246251589361413123881433368678637195652 [7.991e71], 469067 [4.69e5])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 425, 11375 [1.137e4], 8972522 [8.972e6]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(177)
+    │   ├─ [0] userB::fallback{value: 177}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50982] StakingHandler::unstake(8640952527469398409972618390 [8.64e27], 474097901510807077929932864135677241879210640521178 [4.74e50])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 10, 0, 8972522 [8.972e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(10)
+    │   ├─ [0] userA::fallback{value: 10}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(307720026479343884390250947696878410 [3.077e35])
+    ├─ [0] VM::warp(10842932 [1.084e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56843] StakingHandler::stake(378871884966488876408397332595237339823862255059 [3.788e47], 17466303615208111508604659885 [1.746e28])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 59}(59)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(7341)
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 307, 16583 [1.658e4], 10842932 [1.084e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 16583}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 16583 [1.658e4]) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(100000 [1e5])
+    ├─ [0] VM::warp(10942932 [1.094e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [73943] StakingHandler::stake(229, 7967)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 29}(29)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [63252] StakingHandler::stake(5462999744005 [5.462e12], 7915991240 [7.915e9])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 5}(5)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(508091294 [5.08e8])
+    ├─ [0] VM::warp(11002226 [1.1e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [53306] StakingHandler::unstake(0, 5289)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 336, 307, 10942932 [1.094e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [53914] StakingHandler::unstake(115792089237316195423570985008687907853269984665640564039457584007913129639933 [1.157e77], 52769745824 [5.276e10])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 5, 0, 10942932 [1.094e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(3)
+    │   ├─ [0] userA::fallback{value: 3}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(46315662223790109 [4.631e16], 851)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 335, 307, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(249)
+    │   ├─ [0] userB::fallback{value: 249}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(18374750 [1.837e7], 3)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 50}(50)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(2427, 5625)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 27}(27)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48021] StakingHandler::stake(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(200027168247538114418928128994034136817808293661659589678745116142679463646 [2e74], 520273849599968 [5.202e14])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 46}(46)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(86400 [8.64e4])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 48, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [50982] StakingHandler::unstake(2592000 [2.592e6], 570)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 48, 0, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(48)
+    │   ├─ [0] userA::fallback{value: 48}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(94200813239562249201199238629172094478916435483063037 [9.42e52], 89263948928929342427534052197358458936002925 [8.926e43])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 263, 307, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(208)
+    │   ├─ [0] userB::fallback{value: 208}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47403] StakingHandler::stake(0, 1)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 1}(1)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(8305)
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 56, 307, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 307}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 307) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(1410455511389822212455003182318540312612404590988162198075965253 [1.41e63], 104714168289170807287736264185937533571445529680470568815059642113756 [1.047e68])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(142215098631631105999228489158349645678749678827589883 [1.422e53], 257)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 83}(83)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(9769, 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(659947109405962214179209908354591398021 [6.599e38], 548557459964014 [5.485e14])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(1844855 [1.844e6])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 139, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(382)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(1000, 2)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(2305)
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 139, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(7921123274988453930525577009068210428845541237 [7.921e45])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 139, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [60212] StakingHandler::stake(115792089237316195423570985008687907853269984665640564039457584007913129639934 [1.157e77], 645437938452 [6.454e11])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 99}(99)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(2963, 2592000 [2.592e6])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 99, 0, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(92)
+    │   ├─ [0] userA::fallback{value: 92}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(100)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 7, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(1544)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 7, 0, 11002226 [1.1e7]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(1374, 1366)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 7, 0, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(2)
+    │   ├─ [0] userA::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(101420911777575046061489972037469151384463122244938650014781581460683908483 [1.014e74])
+    ├─ [0] VM::warp(12222709 [1.222e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [76806] StakingHandler::unstake(115792089237316195423570985008687907853269984665640564039457584007913129639933 [1.157e77], 19652381200399711146712195319114762914549915930542217971793097436373359047 [1.965e73])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 139, 0, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [45026] Staking::unstake(137)
+    │   ├─ [0] userB::fallback{value: 137}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [43878] StakingHandler::claim(100000 [1e5])
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 70
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 5, 0, 11002226 [1.1e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 70}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 70) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(56164538549130945 [5.616e16])
+    ├─ [0] VM::warp(12553654 [1.255e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [73933] StakingHandler::stake(253043700805493537596444049908109 [2.53e32], 11817165883238546669576277404679407877690071985526387457335940430 [1.181e64])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 9}(9)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(1000, 100)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(86400 [8.64e4], 3210)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 114, 15, 12553654 [1.255e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(102)
+    │   ├─ [0] userA::fallback{value: 102}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(39078880699184 [3.907e13], 2359625562048929342 [2.359e18])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 12, 15, 12553654 [1.255e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(8)
+    │   ├─ [0] userA::fallback{value: 8}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(3339)
+    ├─ [0] VM::warp(12556993 [1.255e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56843] StakingHandler::stake(4079335528642029566669053845168962 [4.079e33], 56382689621222863761280637 [5.638e25])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 62}(62)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(83531248462499749 [8.353e16])
+    ├─ [0] VM::warp(14704742 [1.47e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [46678] StakingHandler::claim(1000)
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 96
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 4, 15, 12553654 [1.255e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [15503] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 111}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 111) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [49580] StakingHandler::stake(100, 2486)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(11475493769 [1.147e10])
+    ├─ [0] VM::warp(15414511 [1.541e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [43878] StakingHandler::claim(30089499667377388505023319588 [3.008e28])
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 832
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 104, 0, 14704742 [1.47e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 832}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 832) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(323636067540553817189228224467258638387262 [3.236e41])
+    ├─ [0] VM::warp(16745773 [1.674e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56603] StakingHandler::stake(115792089237316195423570985008687907853269984665640564039457584007913129639934 [1.157e77], 23059603921814455284077751550898172654448633854274145 [2.305e52])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 99}(99)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(7578, 7485)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 78}(78)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(24204412740846539015677383822276501267992133647846962532 [2.42e55], 59430376911195120224695647942249563616368841826031966222481951335390380709 [5.943e73])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 32}(32)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(261240173698956052050855803929849067968 [2.612e38], 10594635880702412625405193397 [1.059e28])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 273, 5024, 16745773 [1.674e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(127)
+    │   ├─ [0] userB::fallback{value: 127}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1476)
+    ├─ [0] VM::warp(16747249 [1.674e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(46428243618012743821219249402108984131019174 [4.642e43], 818124951785 [8.181e11])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 74}(74)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(5609174172924485214636243569177261849450271467137702827393681400285072 [5.609e69], 1120800396995 [1.12e12])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 72}(72)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(16583 [1.658e4])
+    ├─ [0] VM::warp(16763832 [1.676e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1668)
+    ├─ [0] VM::warp(16765500 [1.676e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [73933] StakingHandler::stake(4322705190449038885525275071884 [4.322e30], 699844286411523664848929389978311438164 [6.998e38])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 84}(84)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(80432747981372116 [8.043e16], 115792089237316195423570985008687907853269984665640564039457584007913129639932 [1.157e77])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 188, 1560, 16765500 [1.676e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(60)
+    │   ├─ [0] userA::fallback{value: 60}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(234123730151627806571 [2.341e20])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 292, 5024, 16747249 [1.674e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 5024}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 5024) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [52693] StakingHandler::unstake(2, 1)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 292, 0, 16747249 [1.674e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(2)
+    │   ├─ [0] userB::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(3091023042628927500632591122773085 [3.091e33], 337503821098966263259800050618435243429 [3.375e38])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 85}(85)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(1139183542736 [1.139e12])
+    ├─ [0] VM::warp(18900236 [1.89e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(1589015295662417799032311228961462493005846 [1.589e42], 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 128, 1560, 16765500 [1.676e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(22)
+    │   ├─ [0] userA::fallback{value: 22}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42896] StakingHandler::claim(100)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 106, 4632, 18900236 [1.89e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 4632}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 4632) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [73943] StakingHandler::stake(39032543302242669289508770341890423611160946314970946305223714829619266762 [3.903e73], 12196156951508625086968795488965056153996365262913 [1.219e49])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 62}(62)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1)
+    ├─ [0] VM::warp(18900237 [1.89e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(812452562740383038406880845636954331106445732752379736040432334 [8.124e62], 1359619527199361083415087302701557 [1.359e33])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 34}(34)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(2592000 [2.592e6])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 106, 0, 18900236 [1.89e7]
+    └─ ← [Stop]
+
+  [51051] StakingHandler::stake(113, 3181606272296 [3.181e12])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 13}(13)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(2592000 [2.592e6])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 119, 0, 18900237 [1.89e7]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(8141249644254237407890292359 [8.141e27])
+    ├─ [0] VM::warp(21320596 [2.132e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(100000 [1e5], 9423)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 471, 9000, 18900237 [1.89e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(148)
+    │   ├─ [0] userB::fallback{value: 148}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [43878] StakingHandler::claim(6982)
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 3332
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 119, 0, 18900237 [1.89e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 3332}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 3332) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1124)
+    ├─ [0] VM::warp(21321720 [2.132e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51051] StakingHandler::stake(311, 4202047188 [4.202e9])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 11}(11)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(947406366573669447718249226844457840307468498551877234517537353 [9.474e62], 2733618397270 [2.733e12])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 130, 0, 21321720 [2.132e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(123)
+    │   ├─ [0] userA::fallback{value: 123}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(980)
+    ├─ [0] VM::warp(21322700 [2.132e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(8405)
+    ├─ [0] VM::warp(21331105 [2.133e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(325)
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 323, 22188 [2.218e4], 21320596 [2.132e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 22188}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 22188 [2.218e4]) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(431141611738781554785050534077495081966333862857818545052434510628138227659 [4.311e74], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 59}(59)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(4734756714981708 [4.734e15])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 7, 0, 21321720 [2.132e7]
+    └─ ← [Stop]
+
+  [50679] StakingHandler::stake(86400 [8.64e4], 508)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(48921194568165731224123337898767799 [4.892e34], 5065088637468196545702639711005799226 [5.065e36])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 99}(99)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(1875143249960463966462816513333731407686986750884938371928 [1.875e57])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 206, 0, 21331105 [2.133e7]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(446621616200101 [4.466e14], 4042284173 [4.042e9])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 382, 0, 21331105 [2.133e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(91)
+    │   ├─ [0] userB::fallback{value: 91}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(683957890821013444778205861339353871754636233686563122961047150403136683802 [6.839e74], 1574645319 [1.574e9])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 291, 0, 21331105 [2.133e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(131)
+    │   ├─ [0] userB::fallback{value: 131}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47393] StakingHandler::stake(0, 100)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 1}(1)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(36871163591428457830832790342259757 [3.687e34])
+    ├─ [0] VM::warp(21638862 [2.163e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [76674] StakingHandler::unstake(100000 [1e5], 8649)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 160, 0, 21331105 [2.133e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [45026] Staking::unstake(160)
+    │   ├─ [0] userB::fallback{value: 160}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [43878] StakingHandler::claim(4858)
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 621
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 207, 0, 21331105 [2.133e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 621}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 621) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [54154] StakingHandler::unstake(2794781755 [2.794e9], 2592000 [2.592e6])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 207, 0, 21590305 [2.159e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(28)
+    │   ├─ [0] userA::fallback{value: 28}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(1791470753427 [1.791e12])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 480, 21638862 [2.163e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 480}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 480) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [60462] StakingHandler::stake(7763660177858533713917655321777185762972513236324835670598114376169121 [7.763e69], 62070586069941763570369665799817180187647222300132045045640103 [6.207e61])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 21}(21)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(24803206617247264612564990915614783674253658365476365765 [2.48e55])
+    ├─ [0] VM::warp(22132627 [2.213e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [43888] StakingHandler::claim(8773)
+    ├─ [10163] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 105
+    ├─ [3372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 21, 0, 21638862 [2.163e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 105}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 105) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1)
+    ├─ [0] VM::warp(22132628 [2.213e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 21, 0, 22070862 [2.207e7]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(7312111180168730244 [7.312e18])
+    ├─ [0] VM::warp(23694872 [2.369e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [43888] StakingHandler::claim(4102503272658665350781240168438258971125911 [4.102e42])
+    ├─ [10163] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 378
+    ├─ [3372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 21, 0, 22070862 [2.207e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 378}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 378) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [75565] StakingHandler::unstake(2, 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 179, 0, 21638862 [2.163e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [45026] Staking::unstake(2)
+    │   ├─ [0] userA::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(2673, 100)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 73}(73)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50496] StakingHandler::unstake(0, 1000)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 250, 4117, 23694872 [2.369e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userA::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5109] StakingHandler::warp(115792089237316195423570985008687907853269984665640564039457584007913129639933 [1.157e77])
+    ├─ [0] VM::warp(26286870 [2.628e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [77046] StakingHandler::unstake(539893816489274255150485316956980406989932123147453571 [5.398e53], 13225070465 [1.322e10])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 21, 0, 23626062 [2.362e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [45026] Staking::unstake(18)
+    │   ├─ [0] userB::fallback{value: 18}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(69309427979306313842943268608759776830055825 [6.93e43])
+    ├─ [0] VM::warp(26454695 [2.645e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56593] StakingHandler::stake(115792089237316195423570985008687907853269984665640564039457584007913129639934 [1.157e77], 29981203076661320138 [2.998e19])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 99}(99)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42896] StakingHandler::claim(140186544066698600461058973927414504573814313229025623961998836529794 [1.401e68])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 348, 11836 [1.183e4], 26454695 [2.645e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 11836}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 11836 [1.183e4]) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [49883] StakingHandler::unstake(1, 100)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 348, 0, 26454695 [2.645e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userA::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(10053141903203290607963379881784829411866092 [1.005e43])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 347, 0, 26454695 [2.645e7]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(60503750830419802786945189256165859447651574319546909141009400614836 [6.05e67])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 347, 0, 26454695 [2.645e7]
+    └─ ← [Stop]
+
+  [55372] StakingHandler::stake(2, 1038783637113 [1.038e12])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 2}(2)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(7588995746381559 [7.588e15], 232279391114 [2.322e11])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 59}(59)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(793540547278482649543346985719458404471084537088951235322306 [7.935e59], 429343741568537531520950431088 [4.293e29])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 6}(6)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5109] StakingHandler::warp(115792089237316195423570985008687907853269984665640564039457584007913129639932 [1.157e77])
+    ├─ [0] VM::warp(29046692 [2.904e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59574] StakingHandler::unstake(88940416259920993723588486888725854714002345150146842587256198095 [8.894e64], 5443878385255555226991652330552376979661915914360946123065 [5.443e57])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 5, 633, 26454695 [2.645e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(5)
+    │   ├─ [0] userB::fallback{value: 5}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(6743)
+    ├─ [0] VM::warp(29053435 [2.905e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [16221] StakingHandler::unstake(2592000 [2.592e6], 4527)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 778, 29046692 [2.904e7]
+    └─ ← [Stop]
+
+  [43878] StakingHandler::claim(0)
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 12360 [1.236e4]
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 412, 0, 26454695 [2.645e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 12360}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 12360 [1.236e4]) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1)
+    ├─ [0] VM::warp(29053436 [2.905e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(5476922511086799105579494109429155550180350323 [5.476e45])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 778, 29046692 [2.904e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 778}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 778) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [16221] StakingHandler::unstake(10768095899 [1.076e10], 92396934168319513877183623688808673506487342887791 [9.239e49])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 0, 29046692 [2.904e7]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(148177718277289811198490 [1.481e23])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 412, 0, 29046695 [2.904e7]
+    └─ ← [Stop]
+
+  [52683] StakingHandler::unstake(3, 1460177523733120850356151522140622872090773281468835812064398538912 [1.46e66])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 412, 0, 29046695 [2.904e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(3)
+    │   ├─ [0] userA::fallback{value: 3}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(13143469186128413492093394556290035954868 [1.314e40])
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 409, 0, 29053436 [2.905e7]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2)
+    ├─ [0] VM::warp(29053438 [2.905e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [20564] StakingHandler::claim(100)
+    ├─ [5181] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 409, 0, 29053436 [2.905e7]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(3152)
+    ├─ [0] VM::warp(29056590 [2.905e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(86400 [8.64e4])
+    ├─ [0] VM::warp(29142990 [2.914e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(852)
+    ├─ [0] VM::warp(29143842 [2.914e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [43878] StakingHandler::claim(52247466 [5.224e7])
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 409
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 409, 0, 29053436 [2.905e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 409}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 409) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(310247315059319127565738629083741094 [3.102e35])
+    ├─ [0] VM::warp(30036936 [3.003e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [63262] StakingHandler::stake(405982685932363208377 [4.059e20], 45302341091152282940050362904057887 [4.53e34])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 77}(77)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [73933] StakingHandler::stake(7175, 2592000 [2.592e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 75}(75)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [4491] StakingHandler::warp(0)
+    ├─ [0] VM::warp(30036937 [3.003e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(9698596438314225272580008515438391251332668447057588556 [9.698e54])
+    ├─ [0] VM::warp(30249493 [3.024e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(6291590484444854085247098552 [6.291e27])
+    ├─ [0] VM::warp(32836045 [3.283e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [43888] StakingHandler::claim(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [10163] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 2464
+    ├─ [3372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 77, 0, 30036936 [3.003e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 2464}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 2464) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1000)
+    ├─ [0] VM::warp(32837045 [3.283e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(9641)
+    ├─ [0] VM::warp(32846686 [3.284e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(2012669830158086 [2.012e15], 78484002606161159329255780242289292247025983244333461192435 [7.848e58])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 86}(86)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(17977567290760234873669141251599 [1.797e31], 128067701487449356868586629059895338589444562 [1.28e44])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 484, 4090, 30036936 [3.003e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(327)
+    │   ├─ [0] userA::fallback{value: 327}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(3)
+    ├─ [0] VM::warp(32846689 [3.284e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51051] StakingHandler::stake(2314082340807377153698743964626869 [2.314e33], 1509242873600994288700170000006927081910069614152906881621028561746597572348 [1.509e75])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 69}(69)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [54164] StakingHandler::unstake(25368813527694926388452501790565 [2.536e31], 149825064651870208356920262933059994089061265 [1.498e44])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 163, 0, 32846686 [3.284e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(67)
+    │   ├─ [0] userB::fallback{value: 67}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(100000 [1e5], 6350)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(9770, 9011)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 70}(70)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(15143893621735 [1.514e13], 98794878 [9.879e7])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 326, 19578 [1.957e4], 32846689 [3.284e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(119)
+    │   ├─ [0] userA::fallback{value: 119}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(1000, 0)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(699844286411523664848929389978311438164 [6.998e38], 2592000 [2.592e6])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 307, 19578 [1.957e4], 32846689 [3.284e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(54)
+    │   ├─ [0] userA::fallback{value: 54}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(218499542882242683 [2.184e17], 3)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 166, 0, 32846689 [3.284e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(39)
+    │   ├─ [0] userB::fallback{value: 39}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(1670209686067228194015467136361929673287863312462801701 [1.67e54], 3980741264560958065057956229099978990160150 [3.98e42])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 1}(1)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2)
+    ├─ [0] VM::warp(32846691 [3.284e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [4491] StakingHandler::warp(0)
+    ├─ [0] VM::warp(32846692 [3.284e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [50679] StakingHandler::stake(2592000 [2.592e6], 65878 [6.587e4])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [52693] StakingHandler::unstake(100, 1924991 [1.924e6])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 127, 0, 32846689 [3.284e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(100)
+    │   ├─ [0] userB::fallback{value: 100}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(8945)
+    ├─ [0] VM::warp(32855637 [3.285e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(1350, 8413)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 50}(50)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47889] StakingHandler::stake(1000, 695)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(2592000 [2.592e6], 7577)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 177, 0, 32855637 [3.285e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(12)
+    │   ├─ [0] userB::fallback{value: 12}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(5980809944202443674578470030694206033872274634790808520313357 [5.98e60], 110644942507006836511 [1.106e20])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 165, 0, 32855637 [3.285e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(142)
+    │   ├─ [0] userB::fallback{value: 142}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(539791219246400110 [5.397e17], 7515132928155303545502520762566657047984079667 [7.515e45])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 10}(10)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(272746832916861250342584760781 [2.727e29], 980700357263743481 [9.807e17])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 33, 0, 32855637 [3.285e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(23)
+    │   ├─ [0] userB::fallback{value: 23}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [52683] StakingHandler::unstake(100, 86400 [8.64e4])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 354, 19578 [1.957e4], 32846692 [3.284e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(100)
+    │   ├─ [0] userA::fallback{value: 100}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(86400 [8.64e4])
+    ├─ [0] VM::warp(32942037 [3.294e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(760937041404731920991021502933364663103844676363 [7.609e47])
+    ├─ [0] VM::warp(34866400 [3.486e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [43888] StakingHandler::claim(1914637571928547 [1.914e15])
+    ├─ [10163] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 230
+    ├─ [3372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 10, 0, 32855637 [3.285e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [12703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 230}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 230) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [54164] StakingHandler::unstake(30296734434414412364180847530797 [3.029e31], 181595 [1.815e5])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 10, 0, 34842837 [3.484e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(7)
+    │   ├─ [0] userB::fallback{value: 7}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(8827)
+    ├─ [0] VM::warp(34875227 [3.487e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(5071)
+    ├─ [0] VM::warp(34880298 [3.488e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(1535, 2315)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 35}(35)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(1295, 6912)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 95}(95)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [49893] StakingHandler::unstake(1, 47249807575124669325385655179626645692957415 [4.724e43])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 38, 0, 34880298 [3.488e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2486)
+    ├─ [0] VM::warp(34882784 [3.488e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2817)
+    ├─ [0] VM::warp(34885601 [3.488e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [50689] StakingHandler::stake(1000, 325)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51124] StakingHandler::unstake(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77], 70934255938291350601829731 [7.093e25])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 137, 0, 34885601 [3.488e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(137)
+    │   ├─ [0] userB::fallback{value: 137}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51051] StakingHandler::stake(403987809145330407245296781013870794424780384379340558202831245 [4.039e62], 825232201975712676258747500921114933018809786282874127511064538456 [8.252e65])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 45}(45)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(114411404128063255 [1.144e17])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 0, 34885601 [3.488e7]
+    └─ ← [Stop]
+
+  [49883] StakingHandler::unstake(224, 2122)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 394, 25420 [2.542e4], 34885601 [3.488e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(224)
+    │   ├─ [0] userA::fallback{value: 224}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(86400 [8.64e4], 100000 [1e5])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [20574] StakingHandler::claim(5234489578527031109558139442695956698336509 [5.234e42])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 0, 34885601 [3.488e7]
+    └─ ← [Stop]
+
+  [60462] StakingHandler::stake(1111951709878868495930307965587312998263457 [1.111e42], 4295525642151750113732127759623145596265 [4.295e39])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 57}(57)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(55444135346414803271744487210219282366370919252 [5.544e46], 3)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 57, 0, 34885601 [3.488e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(50)
+    │   ├─ [0] userB::fallback{value: 50}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(72908432404531990598446102726013 [7.29e31])
+    ├─ [0] VM::warp(35531614 [3.553e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(9314105516 [9.314e9], 7611985158204 [7.611e12])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 16}(16)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(684, 2592000 [2.592e6])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 286, 27310 [2.731e4], 35531614 [3.553e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(112)
+    │   ├─ [0] userA::fallback{value: 112}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [73943] StakingHandler::stake(4087043661772243922319849 [4.087e24], 18470298159739006025 [1.847e19])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 49}(49)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1)
+    ├─ [0] VM::warp(35531615 [3.553e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(1329308865529318854980442810668122694338623 [1.329e42], 1808445591339362961377362020143298062162038564836347126586391379 [1.808e63])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 23}(23)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [42906] StakingHandler::claim(75307966822095812338873987180315092832166695655374855 [7.53e52])
+    ├─ [5181] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [5372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 79, 49, 35531615 [3.553e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [14703] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 49}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 49) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(147428072288918634581221633310997080356321169057032 [1.474e50], 11)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 32}(32)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50811] StakingHandler::stake(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77], 1506906 [1.506e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(1098676560736132786477009925967998976944781161623624 [1.098e51])
+    ├─ [0] VM::warp(36067239 [3.606e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(8585871448995086495122246652611990876132832969052973434349 [8.585e57])
+    ├─ [0] VM::warp(37885588 [3.788e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(17285978202311423077605810737 [1.728e28], 12730175419214 [1.273e13])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 274, 27310 [2.731e4], 35531615 [3.553e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(119)
+    │   ├─ [0] userA::fallback{value: 119}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [77046] StakingHandler::unstake(3996677116090128500394 [3.996e21], 228358214255698908339106983821 [2.283e29])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 111, 0, 35531615 [3.553e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [45026] Staking::unstake(18)
+    │   ├─ [0] userB::fallback{value: 18}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(44040456302091394744769131922935 [4.404e31])
+    ├─ [0] VM::warp(40240523 [4.024e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [55362] StakingHandler::stake(3, 29172634503597920618884 [2.917e22])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 3}(3)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(26816633838442398116709289538465424621807148128896598990020118567261196202698 [2.681e76])
+    ├─ [0] VM::warp(41659221 [4.165e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(16691747475257477054 [1.669e19])
+    ├─ [0] VM::warp(43296275 [4.329e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(2321939793600088910375979017143198282 [2.321e36], 104875227535164896 [1.048e17])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 82}(82)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50982] StakingHandler::unstake(86400 [8.64e4], 3112)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 240, 44423 [4.442e4], 43296275 [4.329e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(240)
+    │   ├─ [0] userA::fallback{value: 240}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(5043847 [5.043e6], 72281055986453308858005451218091730393062379492032769535965894154646736 [7.228e70])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 44423 [4.442e4], 43296275 [4.329e7]
+    └─ ← [Stop]
+
+  [60452] StakingHandler::stake(21396756182422093815360000366913708681845752407 [2.139e46], 7538)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 7}(7)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [56843] StakingHandler::stake(772, 1)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 72}(72)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(1647321788687038106281701781259972141973101314578635638729423301082594178459 [1.647e75])
+    ├─ [0] VM::warp(43522734 [4.352e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5109] StakingHandler::warp(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [0] VM::warp(46114734 [4.611e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(8913303941961412770505887 [8.913e24], 1742562243561999007475402636284616596803006909958379281915254353186494020 [1.742e72])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 87}(87)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [59706] StakingHandler::unstake(115792089237316195423570985008687907853269984665640564039457584007913129639934 [1.157e77], 3)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 165, 8763, 43296275 [4.329e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(164)
+    │   ├─ [0] userB::fallback{value: 164}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50992] StakingHandler::unstake(258707715058267680208817744056841733 [2.587e35], 998282377498389198612672899617588187790273736469504443071168512260083 [9.982e68])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 1, 14043 [1.404e4], 46114734 [4.611e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(930564144412 [9.305e11], 2180065469774992274129667452 [2.18e27])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 12}(12)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [16221] StakingHandler::unstake(83279337288641622790377771261381504 [8.327e34], 67689306206368985869699930249905699745980120701641051 [6.768e52])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 14043 [1.404e4], 46114734 [4.611e7]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(7515132928155303545502520762566657047984079667 [7.515e45], 1000)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 106, 44647 [4.464e4], 46114734 [4.611e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(69)
+    │   ├─ [0] userA::fallback{value: 69}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(1593, 3014)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 93}(93)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(3026, 100)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 26}(26)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [4491] StakingHandler::warp(0)
+    ├─ [0] VM::warp(46114735 [4.611e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [16221] StakingHandler::unstake(701, 2592924151522634257990415114957466746551381010619320185787053667220907 [2.592e69])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 14043 [1.404e4], 46114734 [4.611e7]
+    └─ ← [Stop]
+
+  [5109] StakingHandler::warp(115792089237316195423570985008687907853269984665640564039457584007913129639932 [1.157e77])
+    ├─ [0] VM::warp(48706732 [4.87e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(4156197352771812854801731807391 [4.156e30])
+    ├─ [0] VM::warp(50466123 [5.046e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(284519714343594040352283148574674484863253817683 [2.845e47], 118636099774 [1.186e11])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 156, 44647 [4.464e4], 46114734 [4.611e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(59)
+    │   ├─ [0] userA::fallback{value: 59}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [63262] StakingHandler::stake(1588689931910878706832597148651835981381293399912242870692437914604387935 [1.588e72], 54744943751177330665366088135830447145843289929132542539692416990627522998217 [5.474e76])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 35}(35)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(99851292628538482408031757022685522128038192489838028837335327 [9.985e61], 63676059033669860085372294982354156063364677026770801 [6.367e52])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 27}(27)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(4042959781776310446 [4.042e18])
+    ├─ [0] VM::warp(50584569 [5.058e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(13119448013038150744687925231923365858205972964885 [1.311e49], 134848569944915723298583847354330548 [1.348e35])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 97, 52447 [5.244e4], 50466123 [5.046e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(28)
+    │   ├─ [0] userA::fallback{value: 28}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(523746336782124233133292220437705651923309973331309794797502776860475679761 [5.237e74])
+    ├─ [0] VM::warp(51480330 [5.148e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(11787580319912356936747038 [1.178e25], 2)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 69, 52544 [5.254e4], 50584569 [5.058e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(18)
+    │   ├─ [0] userA::fallback{value: 18}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(703907432411738073707691293920289360042836746 [7.039e44], 80638465327624920109369517850534563339061791249214996 [8.063e52])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 46}(46)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(1381835337857779357046999865358224698239631684112432287342665443446896300 [1.381e72])
+    ├─ [0] VM::warp(53512630 [5.351e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(189173862949616646144449798953882 [1.891e32])
+    ├─ [0] VM::warp(55890512 [5.589e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(10942932 [1.094e7], 2592000 [2.592e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 32}(32)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(568819986330567114 [5.688e17], 91735627765230986847370 [9.173e22])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 14}(14)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [58475] StakingHandler::unstake(3, 115792089237316195423570985008687907853269984665640564039457584007913129639933 [1.157e77])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 62, 14043 [1.404e4], 50466123 [5.046e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(3)
+    │   ├─ [0] userB::fallback{value: 3}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [49893] StakingHandler::unstake(2, 180581817761729006951056455 [1.805e26])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 59, 17887 [1.788e4], 55890512 [5.589e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(2)
+    │   ├─ [0] userB::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(10279539045340612846492139143265044781482558999 [1.027e46], 4767019081831 [4.767e12])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 57, 17887 [1.788e4], 55890512 [5.589e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(34)
+    │   ├─ [0] userB::fallback{value: 34}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(86400 [8.64e4], 1000)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(1198, 1198)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 243, 58181 [5.818e4], 55890512 [5.589e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(226)
+    │   ├─ [0] userA::fallback{value: 226}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(686644275540 [6.866e11], 258674767694405901629095538581173 [2.586e32])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 40}(40)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(4517, 100000 [1e5])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 17, 58181 [5.818e4], 55890512 [5.589e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(12)
+    │   ├─ [0] userA::fallback{value: 12}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(514202758940 [5.142e11], 986298706909658503607522572875687 [9.862e32])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 40}(40)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [46790] StakingHandler::stake(1, 503)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 1}(1)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(7804617372057932016817139898977611636033646 [7.804e42])
+    ├─ [0] VM::warp(56948158 [5.694e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(30089499667377388505023319588 [3.008e28], 6853)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 104, 17887 [1.788e4], 55890512 [5.589e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(12)
+    │   ├─ [0] userB::fallback{value: 12}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(5976374603522340182905 [5.976e21], 123994255887657 [1.239e14])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 5}(5)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [58465] StakingHandler::unstake(2, 100000 [1e5])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 5, 58181 [5.818e4], 55890512 [5.589e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(2)
+    │   ├─ [0] userA::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(1405073584334617242694593730199385274072795527213867472284896743227933 [1.405e69], 357976782212914671840630478504095005985540741635006663485597720185 [3.579e65])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 97, 19135 [1.913e4], 56948158 [5.694e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(37)
+    │   ├─ [0] userB::fallback{value: 37}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(23302514445480656847467018612437473735586729935525961737768083464176 [2.33e67], 215244097706557873936015162457162228 [2.152e35])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 76}(76)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(189055157318635408230026031 [1.89e26], 3179596152737577874754579947550893011116822 [3.179e42])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 79, 58241 [5.824e4], 56948158 [5.694e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(18)
+    │   ├─ [0] userA::fallback{value: 18}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(3343, 86400 [8.64e4])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 61, 58241 [5.824e4], 56948158 [5.694e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(49)
+    │   ├─ [0] userA::fallback{value: 49}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(3938146530661661389904456607431137489808671 [3.938e42], 301961 [3.019e5])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 60, 19135 [1.913e4], 56948158 [5.694e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(31)
+    │   ├─ [0] userB::fallback{value: 31}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(3)
+    ├─ [0] VM::warp(56948161 [5.694e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [54154] StakingHandler::unstake(1267296648949034304748543078450014352525936243100255160716291912255318070975 [1.267e75], 22878615710066243748 [2.287e19])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 12, 58241 [5.824e4], 56948158 [5.694e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(3)
+    │   ├─ [0] userA::fallback{value: 3}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [49590] StakingHandler::stake(2, 9423)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 2}(2)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(886833 [8.868e5], 125)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 33}(33)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(3099142893944706986495 [3.099e21], 34126646616460630960951003087026809965315312892593476251376963120227 [3.412e67])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 64, 19135 [1.913e4], 56948161 [5.694e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(63)
+    │   ├─ [0] userB::fallback{value: 63}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(6625, 2592000 [2.592e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 25}(25)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(3096084526 [3.096e9], 100)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 34, 58241 [5.824e4], 56948161 [5.694e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(20)
+    │   ├─ [0] userA::fallback{value: 20}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(1074500626082 [1.074e12])
+    ├─ [0] VM::warp(59526243 [5.952e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59574] StakingHandler::unstake(96, 32135994306753717234022846130714544455799 [3.213e40])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 1, 19135 [1.913e4], 56948161 [5.694e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [60462] StakingHandler::stake(75555583796244948096943986909059273781023037386095706009263 [7.555e58], 115792089237316195423570985008687907853269984665640564039457584007913129639933 [1.157e77])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 63}(63)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(1666141477627732211739474846046080562777625 [1.666e42])
+    ├─ [0] VM::warp(60991868 [6.099e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5109] StakingHandler::warp(115792089237316195423570985008687907853269984665640564039457584007913129639932 [1.157e77])
+    ├─ [0] VM::warp(63583865 [6.358e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(12958674016526514712656702776940430034773449501094920808880144576 [1.295e64], 16355524264870866746275094129521033406139039 [1.635e43])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 63, 19164 [1.916e4], 59526243 [5.952e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(8)
+    │   ├─ [0] userB::fallback{value: 8}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2)
+    ├─ [0] VM::warp(63583867 [6.358e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [55362] StakingHandler::stake(2, 0)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 2}(2)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51061] StakingHandler::stake(1571, 8279)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 71}(71)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47889] StakingHandler::stake(1000, 19652381200399711146712195319114762914549915930542217971793097436373359047 [1.965e73])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(86400 [8.64e4])
+    ├─ [0] VM::warp(63670267 [6.367e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56843] StakingHandler::stake(407631691873354964208702167797751287518464402528644787419966963724091265577 [4.076e74], 3)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 77}(77)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [49893] StakingHandler::unstake(1, 4211)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 303, 22288 [2.228e4], 63670267 [6.367e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(1590, 66825197419012122137074745411204083445868112254856417614819590180448994970 [6.682e73])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 16, 59305 [5.93e4], 63583867 [6.358e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(6)
+    │   ├─ [0] userA::fallback{value: 6}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(552066212332538500224542671616800395831199611556216317044800485079557962 [5.52e71], 94934825349699773479450976772180399 [9.493e34])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 62}(62)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(42907978528077464906987058952178969259112648681920602098348926130228349 [4.29e70], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 49}(49)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(120838843716748382233418783987790630825994298057073404987470165800074442 [1.208e71])
+    ├─ [0] VM::warp(64128709 [6.412e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(4785763035629088441894055581048532502685306166483736 [4.785e51])
+    ├─ [0] VM::warp(65780445 [6.578e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(7732329296060034870742136 [7.732e24], 115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 413, 22288 [2.228e4], 63670267 [6.367e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(347)
+    │   ├─ [0] userB::fallback{value: 347}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48261] StakingHandler::stake(7684, 5815)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 84}(84)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(4031633832671496110204433035819425990022960194884811808557993819422442 [4.031e69])
+    ├─ [0] VM::warp(65810887 [6.581e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(118134825092584213929258537791836855052967755054764811680632 [1.181e59])
+    ├─ [0] VM::warp(68371519 [6.837e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(40540778053454722541288604 [4.054e25])
+    ├─ [0] VM::warp(69628123 [6.962e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59564] StakingHandler::unstake(86400 [8.64e4], 2)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 10, 59321 [5.932e4], 63670267 [6.367e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(10)
+    │   ├─ [0] userA::fallback{value: 10}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(710, 773316215 [7.733e8])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 150, 32200 [3.22e4], 65780445 [6.578e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(110)
+    │   ├─ [0] userB::fallback{value: 110}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(6651)
+    ├─ [0] VM::warp(69634774 [6.963e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(100000 [1e5])
+    ├─ [0] VM::warp(69734774 [6.973e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(100, 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 60001 [6e4], 69628123 [6.962e7]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(689523 [6.895e5])
+    ├─ [0] VM::warp(70424297 [7.042e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(1925, 1)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 40, 38800 [3.88e4], 69628123 [6.962e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(5)
+    │   ├─ [0] userB::fallback{value: 5}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(100, 7449)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 35, 39160 [3.916e4], 70424297 [7.042e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(30)
+    │   ├─ [0] userB::fallback{value: 30}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [62880] StakingHandler::stake(86400 [8.64e4], 9646)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(44896348845877309306049469918539937249795196615707494541573577258208035758 [4.489e73], 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 100, 60001 [6e4], 70424297 [7.042e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(58)
+    │   ├─ [0] userA::fallback{value: 58}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(19518758334850529793563721749794850270146909693092163913239195362 [1.951e64], 7066666786623933283006 [7.066e21])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 42, 60001 [6e4], 70424297 [7.042e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(36)
+    │   ├─ [0] userA::fallback{value: 36}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(32846690 [3.284e7], 86400 [8.64e4])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 6, 60001 [6e4], 70424297 [7.042e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(2)
+    │   ├─ [0] userA::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(32493325096786694774316595146409196864247430210147404361829557383863058 [3.249e70], 165918949162916654810981570317023387885749 [1.659e41])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 5, 39160 [3.916e4], 70424297 [7.042e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(3)
+    │   ├─ [0] userB::fallback{value: 3}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(633951646914520393467320235220440180768990157489160910335577072204 [6.339e65])
+    ├─ [0] VM::warp(72296501 [7.229e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(3322779289291 [3.322e12], 9474329391542065371596150829987112442640128023058206001457892076 [9.474e63])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 91}(91)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(4046358279264 [4.046e12])
+    ├─ [0] VM::warp(72335765 [7.233e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59574] StakingHandler::unstake(1000, 171)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 2, 39160 [3.916e4], 70424297 [7.042e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(2)
+    │   ├─ [0] userB::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51051] StakingHandler::stake(39823963076430525663979794586183440219173233 [3.982e43], 363794157359392049704370450246924215257080396814 [3.637e47])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [21025] Staking::stake{value: 33}(33)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [60462] StakingHandler::stake(1912316521 [1.912e9], 155985398502160944283871237762096996631 [1.559e38])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 21}(21)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(1886953713229406 [1.886e15])
+    ├─ [0] VM::warp(74173171 [7.417e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56461] StakingHandler::stake(2592000 [2.592e6], 7718)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(3099, 0)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 228, 62773 [6.277e4], 74173171 [7.417e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(135)
+    │   ├─ [0] userA::fallback{value: 135}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(51721767019399223676293648111068726411078173133265 [5.172e49], 3701222243266570725238053449828057275430974844929 [3.701e48])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 21, 39204 [3.92e4], 72335765 [7.233e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(20)
+    │   ├─ [0] userB::fallback{value: 20}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(64039503434285026536339254 [6.403e25])
+    ├─ [0] VM::warp(74320425 [7.432e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(21630983162661 [2.163e13])
+    ├─ [0] VM::warp(76171086 [7.617e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(5824960376570 [5.824e12])
+    ├─ [0] VM::warp(76419656 [7.641e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(8565133003869355407256733746122356714715901436624349881476801983738129839265 [8.565e75], 3495084 [3.495e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 65}(65)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(121572278556700201774798 [1.215e23], 1223223421744675023012976054376219001398478474 [1.223e45])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 158, 65191 [6.519e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(66)
+    │   ├─ [0] userA::fallback{value: 66}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [56471] StakingHandler::stake(100000 [1e5], 701)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50506] StakingHandler::unstake(0, 1622080643929358375147184326180942536185237763674313 [1.622e51])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 101, 39671 [3.967e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(262817635152431246480777780592241494721401598597379294224 [2.628e56], 962)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 24}(24)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(37337622645657108425419196 [3.733e25], 3945648015444451319445545172236457988763821900021439166436058683112 [3.945e66])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 96}(96)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(35367043473739959209 [3.536e19], 24702916947424658367505203066643944185468935145528382618813366428 [2.47e64])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 9}(9)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(167202650030126624015636135809742014902 [1.672e38], 30)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 221, 65191 [6.519e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(188)
+    │   ├─ [0] userA::fallback{value: 188}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(8081, 2600)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 33, 65191 [6.519e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(29)
+    │   ├─ [0] userA::fallback{value: 29}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(2228250322642311341320710967027255837801895 [2.228e42], 719458001 [7.194e8])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 100, 39671 [3.967e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(95)
+    │   ├─ [0] userB::fallback{value: 95}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47889] StakingHandler::stake(34866400 [3.486e7], 1)
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(1419, 5438)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 4, 65191 [6.519e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(3)
+    │   ├─ [0] userA::fallback{value: 3}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50982] StakingHandler::unstake(4767019081831 [4.767e12], 8610)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 1, 65191 [6.519e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userA::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2780)
+    ├─ [0] VM::warp(76422436 [7.642e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(6191, 86400 [8.64e4])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 65191 [6.519e4], 76419656 [7.641e7]
+    └─ ← [Stop]
+
+  [52693] StakingHandler::unstake(23, 115792089237316195423570985008687907853269984665640564039457584007913129639933 [1.157e77])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 105, 39671 [3.967e4], 76419656 [7.641e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(23)
+    │   ├─ [0] userB::fallback{value: 23}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(1000)
+    ├─ [0] VM::warp(76423436 [7.642e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(3249605591967 [3.249e12])
+    ├─ [0] VM::warp(78655403 [7.865e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(1000, 10338 [1.033e4])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 65191 [6.519e4], 76419656 [7.641e7]
+    └─ ← [Stop]
+
+  [16211] StakingHandler::unstake(3874, 7594)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 0, 65191 [6.519e4], 76419656 [7.641e7]
+    └─ ← [Stop]
+
+  [63252] StakingHandler::stake(381614040848777476049 [3.816e20], 127644 [1.276e5])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 49}(49)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(100, 100000 [1e5])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 49, 65191 [6.519e4], 78655403 [7.865e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(2)
+    │   ├─ [0] userA::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [56603] StakingHandler::stake(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77], 49172515347952064800589938377339401051986809331102799838078113 [4.917e61])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(75064890684345238488588722054021053601064471602180 [7.506e49], 72751 [7.275e4])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 182, 41721 [4.172e4], 78655403 [7.865e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(172)
+    │   ├─ [0] userB::fallback{value: 172}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(9670)
+    ├─ [0] VM::warp(78665073 [7.866e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(318325998686775948410482632957734127059631908288572540528572181 [3.183e62])
+    ├─ [0] VM::warp(80165254 [8.016e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59574] StakingHandler::unstake(100000 [1e5], 815)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 10, 41721 [4.172e4], 78655403 [7.865e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(10)
+    │   ├─ [0] userB::fallback{value: 10}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(3031)
+    ├─ [0] VM::warp(80168285 [8.016e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(15822618109473346586565059705528407112339601283 [1.582e46])
+    ├─ [0] VM::warp(81593568 [8.159e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [16221] StakingHandler::unstake(13161369282133245037096079261068807489058 [1.316e40], 485172258107008328586705340400737666785973361530903 [4.851e50])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 41891 [4.189e4], 80165254 [8.016e7]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(12127529667616595750100743978888152093 [1.212e37])
+    ├─ [0] VM::warp(83025661 [8.302e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(38765612117909024775816294463303629575127043142847 [3.876e49])
+    ├─ [0] VM::warp(85176508 [8.517e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56461] StakingHandler::stake(86400 [8.64e4], 2592000 [2.592e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [63262] StakingHandler::stake(1920026130021207444907262296247964707908839829751 [1.92e48], 828020257429271263972944472085387877405169054173396866108635836851 [8.28e65])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 51}(51)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(897100 [8.971e5], 1879)
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 51, 41891 [4.189e4], 85176508 [8.517e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(10)
+    │   ├─ [0] userB::fallback{value: 10}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2592000 [2.592e6])
+    ├─ [0] VM::warp(87768508 [8.776e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(86400 [8.64e4])
+    ├─ [0] VM::warp(87854908 [8.785e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(2186655883173301241828697700213055946462344852373876747895173424099177 [2.186e69])
+    ├─ [0] VM::warp(88018085 [8.801e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(2)
+    ├─ [0] VM::warp(88018087 [8.801e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56843] StakingHandler::stake(2977585198781884385598076932505355712135399 [2.977e42], 378941700893766018328843676663719570245944377922574015001 [3.789e56])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 99}(99)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(564361964684456035687257649617024838813483348795640915165 [5.643e56])
+    ├─ [0] VM::warp(90021252 [9.002e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59946] StakingHandler::unstake(214740921204352326517621 [2.147e23], 377395776752650262266536637919049552895599569 [3.773e44])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 140, 43203 [4.32e4], 88018087 [8.801e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(41)
+    │   ├─ [0] userB::fallback{value: 41}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(11286921583445400557014974642461589729309677469561268692369341174 [1.128e64], 2287315971641623507522674304216370848638 [2.287e39])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 74}(74)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(7892873625497078383492816827280959395147834211 [7.892e45], 421445056651828439668345 [4.214e23])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 99, 46423 [4.642e4], 90021252 [9.002e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(36)
+    │   ├─ [0] userB::fallback{value: 36}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(8026, 2592000 [2.592e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 26}(26)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(945059706484568955752441452121220958968835 [9.45e41], 53660203058226869651 [5.366e19])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 63, 46423 [4.642e4], 90021252 [9.002e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(40)
+    │   ├─ [0] userB::fallback{value: 40}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50992] StakingHandler::unstake(195124688225095512662274105452435754 [1.951e35], 3611146717532324717258744241444008169700649992212328654877943333535220244655 [3.611e75])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 23, 46423 [4.642e4], 90021252 [9.002e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(23)
+    │   ├─ [0] userB::fallback{value: 23}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [58991] StakingHandler::stake(2, 16765499 [1.676e7])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [30426] Staking::stake{value: 2}(2)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50992] StakingHandler::unstake(33684357974003053536603075408024286453020097786786226 [3.368e52], 1435056795149061746498754527642374917075896433797158106044681617 [1.435e63])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 2, 46423 [4.642e4], 90021252 [9.002e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(2)
+    │   ├─ [0] userB::fallback{value: 2}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(7468)
+    ├─ [0] VM::warp(90028720 [9.002e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [63262] StakingHandler::stake(13589318392324432924197682700542495810955345601 [1.358e46], 8156809465656194517797845798162100150574168588849 [8.156e48])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 1}(1)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [50992] StakingHandler::unstake(540910691437897867 [5.409e17], 1751439848156219 [1.751e15])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 1, 46423 [4.642e4], 90028720 [9.002e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(1)
+    │   ├─ [0] userB::fallback{value: 1}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [54154] StakingHandler::unstake(7790, 100000 [1e5])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 247, 76948 [7.694e4], 90021252 [9.002e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(133)
+    │   ├─ [0] userA::fallback{value: 133}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47393] StakingHandler::stake(0, 2682)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 1}(1)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(5900)
+    ├─ [0] VM::warp(90034620 [9.003e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [52683] StakingHandler::unstake(42, 2566)
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 115, 76948 [7.694e4], 90028720 [9.002e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [22144] Staking::unstake(42)
+    │   ├─ [0] userA::fallback{value: 42}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(3114, 3564)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 14}(14)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(431332021675915680028284841941179 [4.313e32])
+    ├─ [0] VM::warp(91591799 [9.159e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(3918)
+    ├─ [0] VM::warp(91595717 [9.159e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [56833] StakingHandler::stake(53234 [5.323e4], 2)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [26807] Staking::stake{value: 34}(34)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51354] StakingHandler::unstake(1723587047767520076461681633542845473894507405098207132629320812092219493423 [1.723e75], 70721111974729130883677592605242009751674 [7.072e40])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 121, 78514 [7.851e4], 91595717 [9.159e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(102)
+    │   ├─ [0] userA::fallback{value: 102}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(164720756923974477937 [1.647e20], 7575387740116292994277280544044417787753053603062 [7.575e48])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 37}(37)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(640, 2592000 [2.592e6])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 40}(40)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [3878] StakingHandler::warp(100000 [1e5])
+    ├─ [0] VM::warp(91695717 [9.169e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [59936] StakingHandler::unstake(20962355137329253526481140428541664055570755454383951229 [2.096e55], 133932629450132226071775480614052 [1.339e32])
+    ├─ [7372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 96, 78514 [7.851e4], 91595717 [9.159e7]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [27926] Staking::unstake(61)
+    │   ├─ [0] userA::fallback{value: 61}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(244512 [2.445e5], 267922967257677077100004428792 [2.679e29])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 12}(12)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [16221] StakingHandler::unstake(11145989030549 [1.114e13], 51308932948743636214077321305615058486276812617562242871 [5.13e55])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 0, 46423 [4.642e4], 90028720 [9.002e7]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(9498629806675700607498247346977339600196730625505 [9.498e48], 1849767335414547610910705508972 [1.849e30])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 5}(5)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [63262] StakingHandler::stake(838807424730485875 [8.388e17], 10921325336218315142382327679004263264419601 [1.092e43])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [33226] Staking::stake{value: 75}(75)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(3415, 10134 [1.013e4])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 15}(15)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [51364] StakingHandler::unstake(3012094258253269 [3.012e15], 4765115656899830695957074555392544423873769288541127113784579421239026003 [4.765e72])
+    ├─ [7372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 75, 46423 [4.642e4], 91695717 [9.169e7]
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [19344] Staking::unstake(19)
+    │   ├─ [0] userB::fallback{value: 19}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [15552] StakeInvariantTest::invariant_PrincipalAccounting()
+    ├─ [2425] Staking::totalStake() [staticcall]
+    │   └─ ← [Return] 123
+    ├─ [2535] StakingHandler::ghost_totalPrincipal() [staticcall]
+    │   └─ ← [Return] 123
+    └─ ← [Stop]
+
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 8.48s (8.48s CPU time)
+
+Ran 1 test suite in 8.50s (8.48s CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)

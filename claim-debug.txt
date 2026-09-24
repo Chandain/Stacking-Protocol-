@@ -1,0 +1,252 @@
+Compiling 2 files with Solc 0.8.20
+Solc 0.8.20 finished in 540.28ms
+Compiler run successful!
+Warning: Failure from "/home/richard/stacking-protocol1/cache/invariant/failures/StakeInvariantTest/invariant_PrincipalAccounting" file was ignored because test contract bytecode has changed.
+
+Ran 1 test for test/StakeInvariantTest.t.sol:StakeInvariantTest
+[FAIL: TF]
+	[Sequence] (original: 204, shrunk: 19)
+		sender=0x0000000000000000000000000000000000002136 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[100, 86400 [8.64e4]]
+		sender=0x1E1ac80798087c15292B5eb3AF3B6E1cEF9dffeD addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2592000 [2.592e6], 100]
+		sender=0x000000000000000000000000000000000000031e addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[943605684322830517169493062264209089713944288528879493190166213 [9.436e62], 97914724591222 [9.791e13]]
+		sender=0x00000000000000000000000000000000000015D4 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[320369979996850700457719479720779 [3.203e32], 1924168576638884412695547752 [1.924e27]]
+		sender=0x1669bdd30B88F5d271fe14B2dDC1dcA6b2A8dC4d addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[100000 [1e5], 2]
+		sender=0x3A9884A6004754542447c6649751F887B2241560 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[3963877391197344453575983046348115674221700746820753546331534351508065746945 [3.963e75], 1482]
+		sender=0x81A4b1097576BCe2cF67cf1f484116ca3bBfe68C addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[1746151833 [1.746e9], 187465699346912567725444055709740815705297165319425661879232 [1.874e59]]
+		sender=0x000000000000000000000000000000000000017b addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[71519590048946418067552074072412266799276552859959 [7.151e49], 59625853359606 [5.962e13]]
+		sender=0x4C4A98Ea26B96be0D5752939E9C45edc5f2fd6E1 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2592000 [2.592e6], 100000 [1e5]]
+		sender=0x0000000000000000000000000000000000000011 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2085451121103535269194582345689163982150629313525712931097190011847596 [2.085e69], 7333248537565706660614761472039933953859347354607787 [7.333e51]]
+		sender=0x000000000000000000000000000000000000005B addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[797008278932001299314719836091093922299269934678071894749 [7.97e56]]
+		sender=0x000000000000000000000000000000000000026b addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[115792089237316195423570985008687907853269984665640564039457584007913129639934 [1.157e77]]
+		sender=0x0000000000000000000000000000000000000657 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[79459682907328184417434249300446369991077539 [7.945e43]]
+		sender=0x00000000000000000000000000000000000003Aa addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[100000 [1e5], 100]
+		sender=0x0000000000000000000000000000000000001183 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2592000 [2.592e6], 840]
+		sender=0xbfFB70eFA87675aD07E84871EefD260dCa4A86Ba addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]]
+		sender=0x00000000000000000000000000000000c39B4209 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[12371433637168305214237545924907649299242064996654 [1.237e49]]
+		sender=0x00000000000000000000000000000000000008e0 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=claim(uint256) args=[36997103814804310604698693886680558779989896650 [3.699e46]]
+		sender=0x0000000000000000000000000000000000000B2b addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=claim(uint256) args=[1]
+ invariant_PrincipalAccounting() (runs: 0, calls: 0, reverts: 1)
+
+╭----------------+----------+-------+---------+----------╮
+| Contract       | Selector | Calls | Reverts | Discards |
++========================================================+
+| StakingHandler | claim    | 52    | 1       | 0        |
+|----------------+----------+-------+---------+----------|
+| StakingHandler | stake    | 56    | 0       | 0        |
+|----------------+----------+-------+---------+----------|
+| StakingHandler | unstake  | 48    | 0       | 0        |
+|----------------+----------+-------+---------+----------|
+| StakingHandler | warp     | 48    | 0       | 0        |
+╰----------------+----------+-------+---------+----------╯
+
+Logs:
+  balanceBefore 100925
+  Claim 89425
+  balanceBefore 11500
+
+Traces:
+  [2977565] StakeInvariantTest::setUp()
+    ├─ [713405] → new Staking@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+    │   └─ ← [Return] 3340 bytes of code
+    ├─ [2114406] → new StakingHandler@0x2e234DAe75C793f67A35089C9d99245E1C58470b
+    │   ├─ [0] VM::addr(<pk>) [staticcall]
+    │   │   └─ ← [Return] userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]
+    │   ├─ [0] VM::label(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107], "userA")
+    │   │   └─ ← [Return]
+    │   ├─ [0] VM::addr(<pk>) [staticcall]
+    │   │   └─ ← [Return] userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]
+    │   ├─ [0] VM::label(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B], "userB")
+    │   │   └─ ← [Return]
+    │   ├─ [0] VM::deal(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107], 1000)
+    │   │   └─ ← [Return]
+    │   ├─ [0] VM::deal(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B], 1000)
+    │   │   └─ ← [Return]
+    │   └─ ← [Return] 10070 bytes of code
+    ├─ [0] VM::deal(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107], 1000)
+    │   └─ ← [Return]
+    ├─ [0] VM::deal(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B], 1000)
+    │   └─ ← [Return]
+    ├─ [0] VM::deal(Staking: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], 100000 [1e5])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [130181] StakingHandler::stake(100, 86400 [8.64e4])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [67426] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(2592000 [2.592e6], 100)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(943605684322830517169493062264209089713944288528879493190166213 [9.436e62], 97914724591222 [9.791e13])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 13}(13)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(320369979996850700457719479720779 [3.203e32], 1924168576638884412695547752 [1.924e27])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 79}(79)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(100000 [1e5], 2)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(3963877391197344453575983046348115674221700746820753546331534351508065746945 [3.963e75], 1482)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 45}(45)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(1746151833 [1.746e9], 187465699346912567725444055709740815705297165319425661879232 [1.874e59])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 33}(33)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [48251] StakingHandler::stake(71519590048946418067552074072412266799276552859959 [7.151e49], 59625853359606 [5.962e13])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 59}(59)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(2592000 [2.592e6], 100000 [1e5])
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [80362] StakingHandler::stake(2085451121103535269194582345689163982150629313525712931097190011847596 [2.085e69], 7333248537565706660614761472039933953859347354607787 [7.333e51])
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [50326] Staking::stake{value: 96}(96)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(797008278932001299314719836091093922299269934678071894749 [7.97e56])
+    ├─ [0] VM::warp(2198750 [2.198e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5109] StakingHandler::warp(115792089237316195423570985008687907853269984665640564039457584007913129639934 [1.157e77])
+    ├─ [0] VM::warp(4790749 [4.79e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(79459682907328184417434249300446369991077539 [7.945e43])
+    ├─ [0] VM::warp(6204288 [6.204e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [73561] StakingHandler::stake(100000 [1e5], 100)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [43907] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [47879] StakingHandler::stake(2592000 [2.592e6], 840)
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [18225] Staking::stake{value: 100}(100)
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [5109] StakingHandler::warp(115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77])
+    ├─ [0] VM::warp(8796288 [8.796e6])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [5349] StakingHandler::warp(12371433637168305214237545924907649299242064996654 [1.237e49])
+    ├─ [0] VM::warp(10912942 [1.091e7])
+    │   └─ ← [Return]
+    └─ ← [Stop]
+
+  [47712] StakingHandler::claim(36997103814804310604698693886680558779989896650 [3.699e46])
+    ├─ [0] console::log("balanceBefore", 100925 [1.009e5]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [10163] Staking::earned(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 44766 [4.476e4]
+    ├─ [3372] Staking::getInfo(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107]) [staticcall]
+    │   └─ ← [Return] 829, 44659 [4.465e4], 6204288 [6.204e6]
+    ├─ [0] VM::prank(userA: [0xCe6c11dDc81C10B05678dA2DA034ebD0E5414107])
+    │   └─ ← [Return]
+    ├─ [15503] Staking::claimReward()
+    │   ├─ [0] userA::fallback{value: 89425}()
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    ├─ [0] console::log("Claim", 89425 [8.942e4]) [staticcall]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+  [43600] StakingHandler::claim(1)
+    ├─ [0] console::log("balanceBefore", 11500 [1.15e4]) [staticcall]
+    │   └─ ← [Stop]
+    ├─ [10163] Staking::earned(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 12096 [1.209e4]
+    ├─ [3372] Staking::getInfo(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B]) [staticcall]
+    │   └─ ← [Return] 96, 0, 1
+    ├─ [0] VM::prank(userB: [0xc150499dda64693c6b39dBE263D8F2Df391Db71B])
+    │   └─ ← [Return]
+    ├─ [12975] Staking::claimReward()
+    │   ├─ [0] userB::fallback{value: 12096}()
+    │   │   └─ ← [OutOfFunds] EvmError: OutOfFunds
+    │   └─ ← [Revert] TF
+    └─ ← [Revert] TF
+
+  [15552] StakeInvariantTest::invariant_PrincipalAccounting()
+    ├─ [2425] Staking::totalStake() [staticcall]
+    │   └─ ← [Return] 925
+    ├─ [2535] StakingHandler::ghost_totalPrincipal() [staticcall]
+    │   └─ ← [Return] 925
+    └─ ← [Stop]
+
+Suite result: FAILED. 0 passed; 1 failed; 0 skipped; finished in 3.45s (3.44s CPU time)
+
+Ran 1 test suite in 3.46s (3.45s CPU time): 0 tests passed, 1 failed, 0 skipped (1 total tests)
+
+Failing tests:
+Encountered 1 failing test in test/StakeInvariantTest.t.sol:StakeInvariantTest
+[FAIL: TF]
+	[Sequence] (original: 204, shrunk: 19)
+		sender=0x0000000000000000000000000000000000002136 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[100, 86400 [8.64e4]]
+		sender=0x1E1ac80798087c15292B5eb3AF3B6E1cEF9dffeD addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2592000 [2.592e6], 100]
+		sender=0x000000000000000000000000000000000000031e addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[943605684322830517169493062264209089713944288528879493190166213 [9.436e62], 97914724591222 [9.791e13]]
+		sender=0x00000000000000000000000000000000000015D4 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[320369979996850700457719479720779 [3.203e32], 1924168576638884412695547752 [1.924e27]]
+		sender=0x1669bdd30B88F5d271fe14B2dDC1dcA6b2A8dC4d addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[100000 [1e5], 2]
+		sender=0x3A9884A6004754542447c6649751F887B2241560 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[3963877391197344453575983046348115674221700746820753546331534351508065746945 [3.963e75], 1482]
+		sender=0x81A4b1097576BCe2cF67cf1f484116ca3bBfe68C addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[1746151833 [1.746e9], 187465699346912567725444055709740815705297165319425661879232 [1.874e59]]
+		sender=0x000000000000000000000000000000000000017b addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[71519590048946418067552074072412266799276552859959 [7.151e49], 59625853359606 [5.962e13]]
+		sender=0x4C4A98Ea26B96be0D5752939E9C45edc5f2fd6E1 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2592000 [2.592e6], 100000 [1e5]]
+		sender=0x0000000000000000000000000000000000000011 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2085451121103535269194582345689163982150629313525712931097190011847596 [2.085e69], 7333248537565706660614761472039933953859347354607787 [7.333e51]]
+		sender=0x000000000000000000000000000000000000005B addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[797008278932001299314719836091093922299269934678071894749 [7.97e56]]
+		sender=0x000000000000000000000000000000000000026b addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[115792089237316195423570985008687907853269984665640564039457584007913129639934 [1.157e77]]
+		sender=0x0000000000000000000000000000000000000657 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[79459682907328184417434249300446369991077539 [7.945e43]]
+		sender=0x00000000000000000000000000000000000003Aa addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[100000 [1e5], 100]
+		sender=0x0000000000000000000000000000000000001183 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=stake(uint256,uint256) args=[2592000 [2.592e6], 840]
+		sender=0xbfFB70eFA87675aD07E84871EefD260dCa4A86Ba addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[115792089237316195423570985008687907853269984665640564039457584007913129639935 [1.157e77]]
+		sender=0x00000000000000000000000000000000c39B4209 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=warp(uint256) args=[12371433637168305214237545924907649299242064996654 [1.237e49]]
+		sender=0x00000000000000000000000000000000000008e0 addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=claim(uint256) args=[36997103814804310604698693886680558779989896650 [3.699e46]]
+		sender=0x0000000000000000000000000000000000000B2b addr=[test/StakingHandler.t.sol:StakingHandler]0x2e234DAe75C793f67A35089C9d99245E1C58470b calldata=claim(uint256) args=[1]
+ invariant_PrincipalAccounting() (runs: 0, calls: 0, reverts: 1)
+
+Encountered a total of 1 failing tests, 0 tests succeeded
+
+Tip: Run `forge test --rerun` to retry only the 1 failed test
