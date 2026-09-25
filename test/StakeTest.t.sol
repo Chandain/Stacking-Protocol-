@@ -23,8 +23,29 @@ contract StakingTest is Test {
         staking.stake{value: 100}(100);
     } 
 
-    function invariant_ContractCanCoverPrincipal() public {
-        assertGe(address(staking).balance, staking.totalStake());
+    function test_ClaimRevertsWhenRewardExceedsAvailableAssets() public {
+        vm.startPrank(userA);
+
+        staking.stake{value: 100}(100);
+
+        vm.warp(block.timestamp + 250 days);
+
+        uint256 pendingReward = staking.earned(userA);
+        (, uint256 storedReward,) = staking.getInfo(userA);
+
+        uint256 expectedReward = pendingReward + storedReward;
+        uint256 availableAssets = address(staking).balance;
+
+        assertGt(
+            expectedReward,
+            availableAssets,
+            "Test setup: reward must exceed available assets"
+        );
+        
+        vm.expectRevert(bytes("TF"));
+        staking.claimReward();
+
+        vm.stopPrank();
     }
 
 

@@ -52,6 +52,7 @@ contract StakeInvariantTest is Test {
     }
 
 
+
     function invariant_ContractAssetsMoreThanLiability() public view {
         uint256 balance = address(staking).balance;
         uint256 principal = staking.totalStake();
