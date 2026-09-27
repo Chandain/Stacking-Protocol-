@@ -11,12 +11,35 @@ contract StakingTest is Test {
 
     uint256 period = 1 days;
 
+    string json = '{"bar":"Hello World"}';
+
     function setUp() public {
         staking = new Staking(period, 1);
         vm.deal(userA, 1000);
         vm.deal(userB, 1000);
         vm.deal(address(staking), 10000);
     }
+
+    function parseJsonString(string memory key) public view returns(string memory result){
+        result = vm.parseJsonString(json, key);
+    }
+
+    function testJsonStringWithoutDot() public {
+
+        vm.expectRevert();
+        string memory result = this.parseJsonString("bar");
+        
+        console.log(result);
+    }
+
+    function testJsonStringWithDot() public view {
+        string memory result = parseJsonString(".bar");
+
+        assertEq(result, "Hello World");
+
+        console.log(result);
+    }
+
 
     function test_Stake() public {
         vm.prank(userA);
