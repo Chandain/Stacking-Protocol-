@@ -18,18 +18,20 @@ contract TestRejectEther is Test {
     function testStakingAmountStillSameAfterUnstake() public {
 
         reject.stake{value: 100}(100);
-
+        
+        uint256 balanceBefore = address(reject).balance;
         uint256 stakeBefore = reject.checkStake();
         uint256 totalBefore = reject.totalStake();
-
+        
         vm.expectRevert(bytes("TF"));
         reject.unstake(40);
 
         uint256 stakeAfter = reject.checkStake();
         uint256 totalAfter = reject.totalStake();
 
-        console.log(address(reject).balance);
+        uint256 balanceAfter = address(reject).balance;   
 
+        assertEq(balanceBefore, balanceAfter);
         assertEq(totalBefore, totalAfter);
         assertEq(stakeBefore, stakeAfter);
         

@@ -24,17 +24,16 @@ contract StakingTest is Test {
         result = vm.parseJsonString(json, key);
     }
 
+    //call vm.parseJsonString using key without dot will fails, while using fots will works
+    //this is because foundry using JSON path, foundry need selector to find the location of value in JSON
     function testJsonStringWithoutDot() public {
-
         vm.expectRevert();
-        string memory result = this.parseJsonString("bar");
+        this.parseJsonString("bar");
         
-        console.log(result);
     }
 
     function testJsonStringWithDot() public view {
         string memory result = parseJsonString(".bar");
-
         assertEq(result, "Hello World");
 
         console.log(result);
