@@ -1,5 +1,11 @@
 # Staking Protocol — Security Notes
 
+4. Fix Reward Payment Can Consume Principal
+
+**Evidence**
+`test_RewardPaymentCannotConsumePrincipal()`, this function prove if Reward that User Accumulated more than Reward Avaibility, contract would not use User Principal to Pay the Reward
+
+
 1. Unfunded Reward Liability
 
 **Description**

@@ -78,16 +78,17 @@ contract Staking {
 
         require(amount > 0, "IB");
 
-        // uint256 rewardAvaible = getRewardAvaibility();
+        uint256 rewardAvaible = getRewardAvaibility();
+        require(rewardAvaible > 0, "ICB");
 
-        // if(amount > rewardAvaible) {
-        //     info.reward += amount - rewardAvaible;
-        //     amount = rewardAvaible;
-        // } else {
-        //     info.reward = 0;
-        // }
+        if(amount > rewardAvaible) {
+            info.reward += amount - rewardAvaible;
+            amount = rewardAvaible;
+        } else {
+            info.reward = 0;
+        }
 
-        info.reward = 0;
+        // info.reward = 0;
         info.lastUpdate += consumedTime;
 
         (bool success,) = payable(msg.sender).call{value: amount}("");
