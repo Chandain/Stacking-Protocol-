@@ -82,11 +82,11 @@ contract Staking {
         require(rewardAvaible > 0, "ICB");
 
         if(amount > rewardAvaible) {
-            info.reward += amount - rewardAvaible;
+            info.reward = amount - rewardAvaible;
             amount = rewardAvaible;
         } else {
             info.reward = 0;
-
+        }
         // info.reward = 0;
         info.lastUpdate += consumedTime;
 

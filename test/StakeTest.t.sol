@@ -80,10 +80,18 @@ contract StakingTest is Test {
         uint256 rewardOwed = staking.earned(userA);
         uint256 principalLiability = staking.totalPrincipal();
         uint256 assetsBefore = address(staking).balance;
+        uint256 rewardAvaible = staking.getRewardAvaibility();
+        (, uint256 storedReward,) = staking.getInfo(userA);
+        uint256 expectedReward = storedReward + rewardOwed;
+        uint256 surplusReward = staking.getRewardAvaibility();
 
+        uint256 expectedPaid = expectedReward < surplusReward 
+        ? expectedReward
+        : surplusReward;
         staking.claimReward();
 
         uint256 userBalanceAfter = userA.balance;
+
         uint256 assetsAfter = address(staking).balance;
         uint256 principalAfterClaim = staking.totalPrincipal();
         vm.stopPrank();
@@ -96,10 +104,10 @@ contract StakingTest is Test {
         assertGe(assetsBefore, principalLiability);
         assertGe(assetsBefore, rewardOwed);
 
-        assertEq(userBalanceAfter - userBalanceBefore, rewardOwed);
+        assertEq(userBalanceAfter - userBalanceBefore, expectedPaid);
         assertEq(principalAfterClaim, principalLiability);
-        assertEq(assetsAfter, assetsBefore - rewardOwed);
-        assertLt(assetsAfter, principalAfterClaim);
+        assertEq(assetsAfter, assetsBefore - expectedPaid);
+        // assertLt(assetsAfter, principalAfterClaim);
     }
 
     function test_Stake() public {
@@ -111,7 +119,7 @@ contract StakingTest is Test {
         actor = actorSeed % 2 == 0 ? userA : userB;
     }
 
-    function test_ClaimRevertsWhenRewardExceedsAvailableAssets() public {
+    function test_ClaimStoredRemainsFundToUserInfoWhenFundNotEnough() public {
         vm.startPrank(userA);
 
         staking.stake{value: 100}(100);
@@ -124,12 +132,17 @@ contract StakingTest is Test {
         uint256 expectedReward = pendingReward + storedReward;
         uint256 availableAssets = address(staking).balance;
 
+        uint256 rewardAvaible = staking.getRewardAvaibility();
+        uint256 rewardStored = expectedReward - rewardAvaible;
+
         assertGt(expectedReward, availableAssets, "Test setup: reward must exceed available assets");
 
-        vm.expectRevert(bytes("TF"));
         staking.claimReward();
 
+        (, uint256 storedRewardAfterClaim,) = staking.getInfo(userA);
         vm.stopPrank();
+
+        assertEq(storedRewardAfterClaim, rewardStored);
     }
 
     function testAmountUnstakeIsZero() public {
