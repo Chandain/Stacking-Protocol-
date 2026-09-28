@@ -43,19 +43,19 @@ contract StakeInvariantTest is Test {
     function invariant_ContractCanCoverPrincipal() public view {
         assertGe(
             address(staking).balance,
-            staking.totalStake()
+            staking.totalPrincipal()
         );
     }
 
     function invariant_PrincipalAccounting() public view {
-        assertEq(staking.totalStake(), handler.ghost_totalPrincipal());
+        assertEq(staking.totalPrincipal(), handler.ghost_totalPrincipal());
     }
 
 
 
     function invariant_ContractAssetsMoreThanLiability() public view {
         uint256 balance = address(staking).balance;
-        uint256 principal = staking.totalStake();
+        uint256 principal = staking.totalPrincipal();
         uint256 rewards = rewardLiability();
 
         console.log("assets", balance);

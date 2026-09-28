@@ -52,7 +52,7 @@ contract StakingFuzzTest is Test {
         uint256 unstakeAmount = bound(_unstakeAmount, 1, stakeAmount);
         staking.unstake(unstakeAmount);
 
-        (uint256 userStake, uint256 userReward ,) = staking.getInfo(user); 
+        (uint256 userStake, uint256 userReward, ) = staking.getInfo(user); 
 
         vm.stopPrank();
 

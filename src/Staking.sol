@@ -4,10 +4,9 @@ pragma solidity ^0.8.13;
 import {console} from "forge-std/console.sol";
 
 contract Staking {
-    uint256 public totalLiquidity; 
     uint256 public feePeriod;
     uint256 public rewardRate;
-    uint256 public totalStake;
+    uint256 public totalPrincipal;
 
 
     mapping(address => PositionInfo) positions;
@@ -39,12 +38,16 @@ contract Staking {
             info.lastUpdate = block.timestamp;
         }
 
-        totalStake += amount;
+        totalPrincipal += amount;
         info.stake += amount;
 
     }
 
-    function getInfo(address user) public view returns (uint256 amountStake, uint256 reward, uint256 lastUpdate) {
+    function getInfo(address user) public view returns (
+        uint256 amountStake, 
+        uint256 reward,
+        uint256 lastUpdate) {
+
         PositionInfo storage info = positions[user];
         return (info.stake, info.reward, info.lastUpdate);
     }
@@ -66,6 +69,10 @@ contract Staking {
         feeEarned = info.stake * rewardRate * period;
     }
 
+    function getRewardAvaibility() public view returns(uint256) {
+        return address(this).balance - totalPrincipal;
+    }
+
     function claimReward() public {
         PositionInfo storage info = positions[msg.sender];
 
@@ -76,6 +83,15 @@ contract Staking {
         uint256 amount = (info.stake * rewardRate * period) + info.reward;
 
         require(amount > 0, "IB");
+
+        // uint256 rewardAvaible = getRewardAvaibility();
+
+        // if(amount > rewardAvaible) {
+        //     info.reward += amount - rewardAvaible;
+        //     amount = rewardAvaible;
+        // } else {
+        //     info.reward = 0;
+        // }
 
         info.reward = 0;
         info.lastUpdate += consumedTime;
@@ -97,7 +113,7 @@ contract Staking {
         //kondisi salah
         // info.stake -= amount;
         // info.reward += earned(msg.sender);
-        totalStake -= amount;
+        totalPrincipal -= amount;
         info.lastUpdate = block.timestamp;
 
         (bool success, ) = msg.sender.call{value: amount}("");
