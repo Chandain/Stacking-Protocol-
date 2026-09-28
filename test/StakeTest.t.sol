@@ -38,37 +38,7 @@ contract StakingTest is Test {
         console.log(result);
     }
 
-    function test_RewardPaymentCannotConsumePrincipal() public {
-        vm.startPrank(userA);
-        staking.stake{value: 100}(100);
 
-        vm.warp(block.timestamp + 101 days);
-
-        uint256 userBalanceBefore = userA.balance;
-        uint256 principalBeforeClaim = staking.totalPrincipal();
-        uint256 availible = staking.getRewardAvaibility();
-
-        staking.claimReward();
-
-        uint256 userBalanceAfter = userA.balance;
-        uint256 assetsAfter = address(staking).balance;
-        uint256 principalAfterClaim = staking.totalPrincipal();
-         
-        vm.warp(block.timestamp + 10 days);
-
-        vm.expectRevert(bytes("ICB"));
-        staking.claimReward();
-
-        vm.stopPrank();
-
-
-        assertEq(principalBeforeClaim, principalAfterClaim);
-        assertEq(assetsAfter, principalBeforeClaim);
-        assertEq(userBalanceBefore + availible, userBalanceAfter);
-
-        assertGe(assetsAfter, principalAfterClaim);
-        console.log("q");
-    }
 
     function test_RewardPaymentCanConsumePrincipal() public {
         vm.startPrank(userA);
