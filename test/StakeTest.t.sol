@@ -20,7 +20,7 @@ contract StakingTest is Test {
         vm.deal(address(staking), 10000);
     }
 
-    function parseJsonString(string memory key) public view returns(string memory result){
+    function parseJsonString(string memory key) public view returns (string memory result) {
         result = vm.parseJsonString(json, key);
     }
 
@@ -29,7 +29,6 @@ contract StakingTest is Test {
     function testJsonStringWithoutDot() public {
         vm.expectRevert();
         this.parseJsonString("bar");
-        
     }
 
     function testJsonStringWithDot() public view {
@@ -57,14 +56,8 @@ contract StakingTest is Test {
         uint256 principalAfterClaim = staking.totalPrincipal();
         vm.stopPrank();
 
-        console.log(
-            "contract assets", assetsBefore,
-            "principal liability", principalLiability
-        );
-        console.log(
-            "reward owed", rewardOwed,
-            "assets after", assetsAfter
-        );
+        console.log("contract assets", assetsBefore, "principal liability", principalLiability);
+        console.log("reward owed", rewardOwed, "assets after", assetsAfter);
         console.log("principal after claim", principalAfterClaim);
 
         assertGt(rewardOwed, 0);
@@ -77,13 +70,12 @@ contract StakingTest is Test {
         assertLt(assetsAfter, principalAfterClaim);
     }
 
-
     function test_Stake() public {
         vm.prank(userA);
         staking.stake{value: 100}(100);
-    } 
+    }
 
-    function getActor(uint256 actorSeed) public view returns(address actor){
+    function getActor(uint256 actorSeed) public view returns (address actor) {
         actor = actorSeed % 2 == 0 ? userA : userB;
     }
 
@@ -95,23 +87,18 @@ contract StakingTest is Test {
         vm.warp(block.timestamp + 250 days);
 
         uint256 pendingReward = staking.earned(userA);
-        (, uint256 storedReward, ) = staking.getInfo(userA);
+        (, uint256 storedReward,) = staking.getInfo(userA);
 
         uint256 expectedReward = pendingReward + storedReward;
         uint256 availableAssets = address(staking).balance;
 
-        assertGt(
-            expectedReward,
-            availableAssets,
-            "Test setup: reward must exceed available assets"
-        );
-        
+        assertGt(expectedReward, availableAssets, "Test setup: reward must exceed available assets");
+
         vm.expectRevert(bytes("TF"));
         staking.claimReward();
 
         vm.stopPrank();
     }
-
 
     function testAmountUnstakeIsZero() public {
         vm.startPrank(userA);
@@ -160,11 +147,10 @@ contract StakingTest is Test {
         staking.unstake(amountStake);
         vm.stopPrank();
 
-        (, uint256 userAReward, ) = staking.getInfo(userA);
+        (, uint256 userAReward,) = staking.getInfo(userA);
 
         assertEq(userAReward, 0);
         assertEq(amountReward, 0);
-
     }
 
     function testClaimAfterPartialUnstake() public {
@@ -172,12 +158,11 @@ contract StakingTest is Test {
 
         staking.stake{value: 10}(10);
 
-        
         vm.warp(block.timestamp + 2 days);
         uint256 rewardBeforeUnstake = staking.earned(userA);
 
         staking.unstake(4);
-        
+
         vm.warp(block.timestamp + 1 days);
 
         uint256 rewardAfeterUnstake = staking.earned(userA);
@@ -187,7 +172,7 @@ contract StakingTest is Test {
         uint256 balanceAfterClaim = address(userA).balance;
         vm.stopPrank();
 
-        (, uint256 rewardAfterClaim, ) = staking.getInfo(userA);
+        (, uint256 rewardAfterClaim,) = staking.getInfo(userA);
 
         console.log(rewardBeforeUnstake, rewardAfeterUnstake, balanceBeforeClaim, balanceAfterClaim);
         assertEq(rewardAfterClaim, 0);
@@ -195,7 +180,6 @@ contract StakingTest is Test {
     }
 
     function testPartialUnstakeCheckpointsReward() public {
-
         vm.prank(userA);
         staking.stake{value: 10}(10);
 
@@ -206,7 +190,7 @@ contract StakingTest is Test {
         vm.prank(userA);
         staking.unstake(4);
 
-        (uint256 stake, uint256 reward, ) = staking.getInfo(userA);
+        (uint256 stake, uint256 reward,) = staking.getInfo(userA);
 
         assertEq(stake, 6);
         assertEq(reward, 20);
@@ -234,22 +218,22 @@ contract StakingTest is Test {
 
         assert(reward > 0);
     }
-    
+
     function stakeAndWarp(uint256 amount, uint256 time) internal {
         vm.prank(userA);
         staking.stake{value: amount}(amount);
         vm.warp(block.timestamp + (time + 1));
     }
+
     function test_ClaimDoesNotChangePrincipal() public {
         stakeAndWarp(100, 1 days);
 
         vm.startPrank(userA);
         uint256 principalBeforeClaim = staking.checkAmountStake();
-        
+
         staking.claimReward();
         uint256 principalAfterClaim = staking.checkAmountStake();
         vm.stopPrank();
-
 
         assertEq(principalBeforeClaim, principalAfterClaim);
     }

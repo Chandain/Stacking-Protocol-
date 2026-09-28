@@ -15,10 +15,7 @@ contract StakingFuzzTest is Test {
         vm.deal(address(staking), 10000);
     }
 
-    function testFuzz_PartialUnstake(
-        uint96 _stakeAmount,
-        uint96 _unstakeAmount
-    ) public {
+    function testFuzz_PartialUnstake(uint96 _stakeAmount, uint96 _unstakeAmount) public {
         vm.startPrank(user);
         uint256 stakeAmount = bound(_stakeAmount, 1, 100);
 
@@ -27,18 +24,14 @@ contract StakingFuzzTest is Test {
         uint256 unstakeAmount = bound(_unstakeAmount, 1, stakeAmount);
         staking.unstake(unstakeAmount);
 
-        (uint256 userStake, ,) = staking.getInfo(user); 
+        (uint256 userStake,,) = staking.getInfo(user);
 
         vm.stopPrank();
 
         assertEq(userStake, stakeAmount - unstakeAmount);
     }
 
-    function testFuzz_RewardCheckPoint(
-        uint96 _stakeAmount,
-        uint96 _unstakeAmount,
-        uint256 _elapsed
-    ) public {
+    function testFuzz_RewardCheckPoint(uint96 _stakeAmount, uint96 _unstakeAmount, uint256 _elapsed) public {
         vm.startPrank(user);
 
         uint256 stakeAmount = bound(_stakeAmount, 1, 100);
@@ -52,7 +45,7 @@ contract StakingFuzzTest is Test {
         uint256 unstakeAmount = bound(_unstakeAmount, 1, stakeAmount);
         staking.unstake(unstakeAmount);
 
-        (uint256 userStake, uint256 userReward, ) = staking.getInfo(user); 
+        (uint256 userStake, uint256 userReward,) = staking.getInfo(user);
 
         vm.stopPrank();
 
@@ -82,13 +75,13 @@ contract StakingFuzzTest is Test {
 
         staking.stake{value: amount}(amount);
 
-        (uint256 amountStakedBefore, ,) = staking.getInfo(user);
+        (uint256 amountStakedBefore,,) = staking.getInfo(user);
 
         vm.warp(block.timestamp + 1 days);
 
         staking.unstake(amount);
 
-        (uint256 amountStakedAfter, ,) = staking.getInfo(user);
+        (uint256 amountStakedAfter,,) = staking.getInfo(user);
 
         uint256 amountUnstake = amountStakedBefore - amountStakedAfter;
 
@@ -100,7 +93,7 @@ contract StakingFuzzTest is Test {
 
     function testFuzz_UnstakeMoreThanStakeAMount(uint256 amount) public {
         vm.startPrank(user);
-        
+
         uint256 amountStake = bound(amount, 1, 100);
         staking.stake{value: amountStake}(amountStake);
 
@@ -113,5 +106,4 @@ contract StakingFuzzTest is Test {
 
         vm.stopPrank();
     }
-
 }

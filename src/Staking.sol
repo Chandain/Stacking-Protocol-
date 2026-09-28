@@ -8,7 +8,6 @@ contract Staking {
     uint256 public rewardRate;
     uint256 public totalPrincipal;
 
-
     mapping(address => PositionInfo) positions;
 
     constructor(uint256 _feePeriod, uint256 _rewardRate) {
@@ -30,7 +29,7 @@ contract Staking {
 
         PositionInfo storage info = positions[msg.sender];
 
-        if(info.stake == 0) {
+        if (info.stake == 0) {
             info.lastUpdate = block.timestamp;
         } else {
             uint256 reward = earned(msg.sender);
@@ -40,14 +39,9 @@ contract Staking {
 
         totalPrincipal += amount;
         info.stake += amount;
-
     }
 
-    function getInfo(address user) public view returns (
-        uint256 amountStake, 
-        uint256 reward,
-        uint256 lastUpdate) {
-
+    function getInfo(address user) public view returns (uint256 amountStake, uint256 reward, uint256 lastUpdate) {
         PositionInfo storage info = positions[user];
         return (info.stake, info.reward, info.lastUpdate);
     }
@@ -57,11 +51,11 @@ contract Staking {
         return info.stake;
     }
 
-    function earned(address user) public view returns (uint256 feeEarned){
+    function earned(address user) public view returns (uint256 feeEarned) {
         PositionInfo storage info = positions[user];
 
         uint256 elapsed = block.timestamp - info.lastUpdate;
-        if(elapsed < feePeriod) {
+        if (elapsed < feePeriod) {
             return 0;
         }
         uint256 period = elapsed / feePeriod;
@@ -69,7 +63,7 @@ contract Staking {
         feeEarned = info.stake * rewardRate * period;
     }
 
-    function getRewardAvaibility() public view returns(uint256) {
+    function getRewardAvaibility() public view returns (uint256) {
         return address(this).balance - totalPrincipal;
     }
 
@@ -96,10 +90,9 @@ contract Staking {
         info.reward = 0;
         info.lastUpdate += consumedTime;
 
-        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        (bool success,) = payable(msg.sender).call{value: amount}("");
         require(success, "TF");
     }
-
 
     function unstake(uint256 amount) public {
         require(amount > 0, "IA");
@@ -109,16 +102,15 @@ contract Staking {
 
         info.reward += earned(msg.sender);
         info.stake -= amount;
-        
+
         //kondisi salah
         // info.stake -= amount;
         // info.reward += earned(msg.sender);
         totalPrincipal -= amount;
         info.lastUpdate = block.timestamp;
 
-        (bool success, ) = msg.sender.call{value: amount}("");
+        (bool success,) = msg.sender.call{value: amount}("");
         require(success, "TF");
     }
 }
-
 

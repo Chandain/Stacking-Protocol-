@@ -5,14 +5,12 @@ import {Test, console} from "forge-std/Test.sol";
 import {Staking} from "../src/Staking.sol";
 import {StakingHandler} from "./StakingHandler.t.sol";
 
-
 contract StakeInvariantTest is Test {
     StakingHandler handler;
     Staking staking;
 
     address public userA = makeAddr("userA");
     address public userB = makeAddr("userB");
-
 
     uint256 period = 1 days;
 
@@ -25,14 +23,14 @@ contract StakeInvariantTest is Test {
         vm.deal(address(staking), 100000);
 
         targetContract(address(handler));
-    } 
+    }
 
     function rewardLiability() public view returns (uint256) {
-        (, uint256 storedRewardA, ) = staking.getInfo(userA);
+        (, uint256 storedRewardA,) = staking.getInfo(userA);
         uint256 pendingRewardA = staking.earned(userA);
         uint256 totalA = storedRewardA + pendingRewardA;
 
-        (, uint256 storedRewardB, ) = staking.getInfo(userB);
+        (, uint256 storedRewardB,) = staking.getInfo(userB);
         uint256 pendingRewardB = staking.earned(userB);
         uint256 totalB = storedRewardB + pendingRewardB;
 
@@ -41,17 +39,12 @@ contract StakeInvariantTest is Test {
     }
 
     function invariant_ContractCanCoverPrincipal() public view {
-        assertGe(
-            address(staking).balance,
-            staking.totalPrincipal()
-        );
+        assertGe(address(staking).balance, staking.totalPrincipal());
     }
 
     function invariant_PrincipalAccounting() public view {
         assertEq(staking.totalPrincipal(), handler.ghost_totalPrincipal());
     }
-
-
 
     function invariant_ContractAssetsMoreThanLiability() public view {
         uint256 balance = address(staking).balance;
@@ -65,5 +58,4 @@ contract StakeInvariantTest is Test {
 
         assertGe(balance, principal + rewards);
     }
-
 }

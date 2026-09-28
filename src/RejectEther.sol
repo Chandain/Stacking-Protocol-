@@ -4,12 +4,9 @@ pragma solidity ^0.8.13;
 import {console} from "forge-std/console.sol";
 
 contract RejectEther {
-
     uint256 public totalStake;
 
-
     mapping(address => PositionInfo) positions;
-
 
     struct PositionInfo {
         uint256 stake;
@@ -31,14 +28,11 @@ contract RejectEther {
 
         PositionInfo storage info = positions[msg.sender];
 
-
         info.lastUpdate = block.timestamp;
-
 
         totalStake += amount;
         info.stake += amount;
     }
-
 
     function unstake(uint256 amount) public {
         require(amount > 0, "IA");
@@ -48,7 +42,7 @@ contract RejectEther {
 
         totalStake -= amount;
 
-        (bool success, ) = msg.sender.call{value: amount}("");
+        (bool success,) = msg.sender.call{value: amount}("");
         require(success, "TF");
     }
 }
