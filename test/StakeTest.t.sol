@@ -47,7 +47,7 @@ contract StakingTest is Test {
         staking.stake{value: 100}(100);
         warp(10 days);
 
-        //owed < available 
+        //owed < available
         staking.unstake(20);
         warp(1 days);
 
@@ -77,11 +77,10 @@ contract StakingTest is Test {
         uint256 userBalanceAfter2 = userB.balance;
         assertEq(userBalanceAfter2 - userBalance2, owed2);
 
-
         vm.deal(address(staking), 1200);
         //owed > available
         warp(30 days);
-        
+
         uint256 userBalance3 = userB.balance;
         (, uint256 rewardStored3,) = staking.getInfo(userB);
         uint256 owed3 = staking.earned(userB) + rewardStored3;
@@ -98,13 +97,11 @@ contract StakingTest is Test {
         vm.stopPrank();
     }
 
-
     function test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation() public {
         vm.startPrank(userA);
 
         staking.stake{value: 100}(100);
         vm.warp(block.timestamp + 20 days);
-        
 
         staking.unstake(20);
 
@@ -201,7 +198,6 @@ contract StakingTest is Test {
         assertEq(userBalanceAfter - userBalanceBefore, expectedPaid);
         assertEq(principalAfterClaim, principalLiability);
         assertEq(assetsAfter, assetsBefore - expectedPaid);
-        // assertLt(assetsAfter, principalAfterClaim);
     }
 
     function test_Stake() public {

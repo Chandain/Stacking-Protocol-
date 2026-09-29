@@ -31,10 +31,7 @@ contract StakingFuzzTest is Test {
         assertEq(userStake, stakeAmount - unstakeAmount);
     }
 
-    function testFuzz_ClaimNotDecreasePrincipal(
-        uint256 _elapsed, 
-        uint256 _stakeAmount
-        ) public {
+    function testFuzz_ClaimNotDecreasePrincipal(uint256 _elapsed, uint256 _stakeAmount) public {
         vm.startPrank(user);
         uint256 stakeAmount = bound(_stakeAmount, 100, 1000);
         staking.stake{value: stakeAmount}(stakeAmount);
@@ -45,7 +42,7 @@ contract StakingFuzzTest is Test {
         (, uint256 rewardStored,) = staking.getInfo(user);
         uint256 owed = staking.earned(user) + rewardStored;
 
-        if(owed == 0){
+        if (owed == 0) {
             vm.expectRevert(bytes("IB"));
         }
         staking.claimReward();

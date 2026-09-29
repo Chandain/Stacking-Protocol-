@@ -56,7 +56,7 @@ contract StakingHandler is Test {
         if (expectedReward == 0) return;
 
         vm.prank(actor);
-        if (surplusReward <= 0) {
+        if (surplusReward == 0) {
             vm.expectRevert(bytes("ICB"));
         }
         staking.claimReward();
