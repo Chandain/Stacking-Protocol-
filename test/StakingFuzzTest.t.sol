@@ -31,6 +31,29 @@ contract StakingFuzzTest is Test {
         assertEq(userStake, stakeAmount - unstakeAmount);
     }
 
+    function testFuzz_ClaimNotDecreasePrincipal(
+        uint256 _elapsed, 
+        uint256 _stakeAmount
+        ) public {
+        vm.startPrank(user);
+        uint256 stakeAmount = bound(_stakeAmount, 100, 1000);
+        staking.stake{value: stakeAmount}(stakeAmount);
+
+        uint256 elapsed = bound(_elapsed, 1, 30 days);
+        vm.warp(block.timestamp + elapsed);
+
+        (, uint256 rewardStored,) = staking.getInfo(user);
+        uint256 owed = staking.earned(user) + rewardStored;
+
+        if(owed == 0){
+            vm.expectRevert(bytes("IB"));
+        }
+        staking.claimReward();
+        vm.stopPrank();
+
+        assertGe(address(staking).balance, staking.totalPrincipal());
+    }
+
     function testFuzz_RewardCheckPoint(uint96 _stakeAmount, uint96 _unstakeAmount, uint256 _elapsed) public {
         vm.startPrank(user);
 

@@ -38,18 +38,73 @@ contract StakingTest is Test {
         console.log(result);
     }
 
-    // stored reward nonzero; ok
-    // surplus lebih kecil dari total owed; ok
-    // payout sama dengan surplus; oke
-    // stored reward akhir = owedBefore - payout;
-    // totalPrincipal tidak berubah;
-    // balance contract tetap >= totalPrincipal.
+    function warp(uint256 time) public {
+        vm.warp(block.timestamp + time);
+    }
+
+    function test_ThreeConditionRewardAvaible() public {
+        vm.startPrank(userB);
+        staking.stake{value: 100}(100);
+        warp(10 days);
+
+        //owed < available 
+        staking.unstake(20);
+        warp(1 days);
+
+        uint256 userBalance = userB.balance;
+        (, uint256 rewardStored,) = staking.getInfo(userB);
+        uint256 owed = staking.earned(userB) + rewardStored;
+        uint256 avaible = staking.getRewardAvaibility();
+        assertLt(owed, avaible);
+
+        staking.claimReward();
+
+        uint256 userBalanceAfter = userB.balance;
+        assertEq(userBalanceAfter - userBalance, owed);
+
+        //owed == available
+        warp(80 days);
+        staking.unstake(20);
+        warp(42 days);
+
+        uint256 userBalance2 = userB.balance;
+        (, uint256 rewardStored2,) = staking.getInfo(userB);
+        uint256 owed2 = staking.earned(userB) + rewardStored2;
+        uint256 avaible2 = staking.getRewardAvaibility();
+        assertEq(avaible2, owed2);
+
+        staking.claimReward();
+        uint256 userBalanceAfter2 = userB.balance;
+        assertEq(userBalanceAfter2 - userBalance2, owed2);
+
+
+        vm.deal(address(staking), 1200);
+        //owed > available
+        warp(30 days);
+        
+        uint256 userBalance3 = userB.balance;
+        (, uint256 rewardStored3,) = staking.getInfo(userB);
+        uint256 owed3 = staking.earned(userB) + rewardStored3;
+        uint256 avaible3 = staking.getRewardAvaibility();
+        assertGe(owed3, avaible3);
+
+        staking.claimReward();
+        (, uint256 unpaidReward,) = staking.getInfo(userB);
+        uint256 userBalanceAfter3 = userB.balance;
+
+        assertEq(userBalanceAfter3 - userBalance3, avaible3);
+        assertEq(owed3 - avaible3, unpaidReward);
+
+        vm.stopPrank();
+    }
+
 
     function test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation() public {
         vm.startPrank(userA);
 
         staking.stake{value: 100}(100);
         vm.warp(block.timestamp + 20 days);
+        
 
         staking.unstake(20);
 
