@@ -1,5 +1,13 @@
 # Staking Protocol — Security Notes
 
+5. Testing If Contract Stored Unpaid Reward
+
+**Description**
+Created 2 Test Normal Test & Invariant Test, 2 test Pass With no Error
+
+**Evidance**
+`test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation` & `invariant_RewardCannotUsePrincipal`
+
 4. Fix Reward Payment Can Consume Principal
 
 **Evidence**

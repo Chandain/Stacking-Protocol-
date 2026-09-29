@@ -55,7 +55,6 @@ contract StakingHandler is Test {
         uint256 expectedPaid = expectedReward < surplusReward 
         ? expectedReward
         : surplusReward;
-        console.log(balanceBefore);
         if (expectedReward == 0) return;
 
         vm.prank(actor);
@@ -65,10 +64,7 @@ contract StakingHandler is Test {
         staking.claimReward();
 
         uint256 balanceAfter = address(staking).balance;
-        console.log(balanceAfter);
         uint256 rewardActuallyPaid = balanceBefore - balanceAfter;
-        console.log("Claim", expectedPaid);
-
 
         assertEq(rewardActuallyPaid, expectedPaid);
     }

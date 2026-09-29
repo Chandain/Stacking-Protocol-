@@ -38,6 +38,51 @@ contract StakingTest is Test {
         console.log(result);
     }
 
+    // stored reward nonzero; ok
+    // surplus lebih kecil dari total owed; ok
+    // payout sama dengan surplus; oke
+    // stored reward akhir = owedBefore - payout;   
+    // totalPrincipal tidak berubah;
+    // balance contract tetap >= totalPrincipal.
+    
+
+    function test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation() 
+    public {
+        vm.startPrank(userA);
+
+        staking.stake{value: 100}(100);
+        vm.warp(block.timestamp + 20 days);
+
+        staking.unstake(20);
+
+        vm.warp(block.timestamp + 100 days);
+
+        (, uint256 rewardStoredBeforeClaim, ) = staking.getInfo(userA);
+        uint256 rewardAccured = staking.earned(userA);
+        uint256 rewardAvaible = staking.getRewardAvaibility();
+        uint256 rewardUnpaid = (rewardAccured + rewardStoredBeforeClaim) - rewardAvaible;
+
+        uint256 totalPrincipalBeforeClaim = staking.totalPrincipal();
+
+        staking.claimReward();
+
+        (, uint256 rewardStored, ) = staking.getInfo(userA);
+
+        vm.warp(block.timestamp + 20 days);
+
+        vm.expectRevert(bytes("ICB"));
+        staking.claimReward();
+
+        uint256 totalPrincipalAfterClaim = staking.totalPrincipal();
+
+        vm.stopPrank();
+
+        assertEq(rewardUnpaid, rewardStored);
+        assertEq(totalPrincipalAfterClaim, totalPrincipalBeforeClaim);
+        assertGe(address(staking).balance, totalPrincipalAfterClaim);
+    }
+
+
     function test_RewardPaymentCannotConsumePrincipal() public {
         vm.startPrank(userA);
         staking.stake{value: 100}(100);

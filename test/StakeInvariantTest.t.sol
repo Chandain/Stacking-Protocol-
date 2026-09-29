@@ -38,6 +38,19 @@ contract StakeInvariantTest is Test {
         return total;
     }
 
+
+    function invariant_RewardCannotUsePrincipal() public view {
+        uint256 totalPrincipal = staking.totalPrincipal();
+        uint256 contractBalance = address(staking).balance;
+        uint256 rewardAvaible = staking.getRewardAvaibility();
+
+        if(rewardAvaible > 0){
+            assertEq(contractBalance - rewardAvaible, totalPrincipal);
+        } else {
+            assertEq(contractBalance, totalPrincipal);
+        }
+    }
+
     function invariant_ContractCanCoverPrincipal() public view {
         assertGe(address(staking).balance, staking.totalPrincipal());
     }
