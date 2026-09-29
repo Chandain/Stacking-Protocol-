@@ -41,13 +41,11 @@ contract StakingTest is Test {
     // stored reward nonzero; ok
     // surplus lebih kecil dari total owed; ok
     // payout sama dengan surplus; oke
-    // stored reward akhir = owedBefore - payout;   
+    // stored reward akhir = owedBefore - payout;
     // totalPrincipal tidak berubah;
     // balance contract tetap >= totalPrincipal.
-    
 
-    function test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation() 
-    public {
+    function test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation() public {
         vm.startPrank(userA);
 
         staking.stake{value: 100}(100);
@@ -57,7 +55,7 @@ contract StakingTest is Test {
 
         vm.warp(block.timestamp + 100 days);
 
-        (, uint256 rewardStoredBeforeClaim, ) = staking.getInfo(userA);
+        (, uint256 rewardStoredBeforeClaim,) = staking.getInfo(userA);
         uint256 rewardAccured = staking.earned(userA);
         uint256 rewardAvaible = staking.getRewardAvaibility();
         uint256 rewardUnpaid = (rewardAccured + rewardStoredBeforeClaim) - rewardAvaible;
@@ -66,7 +64,7 @@ contract StakingTest is Test {
 
         staking.claimReward();
 
-        (, uint256 rewardStored, ) = staking.getInfo(userA);
+        (, uint256 rewardStored,) = staking.getInfo(userA);
 
         vm.warp(block.timestamp + 20 days);
 
@@ -81,7 +79,6 @@ contract StakingTest is Test {
         assertEq(totalPrincipalAfterClaim, totalPrincipalBeforeClaim);
         assertGe(address(staking).balance, totalPrincipalAfterClaim);
     }
-
 
     function test_RewardPaymentCannotConsumePrincipal() public {
         vm.startPrank(userA);
@@ -98,14 +95,13 @@ contract StakingTest is Test {
         uint256 userBalanceAfter = userA.balance;
         uint256 assetsAfter = address(staking).balance;
         uint256 principalAfterClaim = staking.totalPrincipal();
-         
+
         vm.warp(block.timestamp + 10 days);
 
         vm.expectRevert(bytes("ICB"));
         staking.claimReward();
 
         vm.stopPrank();
-
 
         assertEq(principalBeforeClaim, principalAfterClaim);
         assertEq(assetsAfter, principalBeforeClaim);
@@ -130,9 +126,7 @@ contract StakingTest is Test {
         uint256 expectedReward = storedReward + rewardOwed;
         uint256 surplusReward = staking.getRewardAvaibility();
 
-        uint256 expectedPaid = expectedReward < surplusReward 
-        ? expectedReward
-        : surplusReward;
+        uint256 expectedPaid = expectedReward < surplusReward ? expectedReward : surplusReward;
         staking.claimReward();
 
         uint256 userBalanceAfter = userA.balance;

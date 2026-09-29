@@ -81,7 +81,7 @@ contract Staking {
         uint256 rewardAvaible = getRewardAvaibility();
         require(rewardAvaible > 0, "ICB");
 
-        if(amount > rewardAvaible) {
+        if (amount > rewardAvaible) {
             info.reward = amount - rewardAvaible;
             amount = rewardAvaible;
         } else {

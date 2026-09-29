@@ -52,13 +52,11 @@ contract StakingHandler is Test {
         uint256 expectedReward = storedReward + pendingReward;
         uint256 surplusReward = staking.getRewardAvaibility();
 
-        uint256 expectedPaid = expectedReward < surplusReward 
-        ? expectedReward
-        : surplusReward;
+        uint256 expectedPaid = expectedReward < surplusReward ? expectedReward : surplusReward;
         if (expectedReward == 0) return;
 
         vm.prank(actor);
-        if(surplusReward <= 0){
+        if (surplusReward <= 0) {
             vm.expectRevert(bytes("ICB"));
         }
         staking.claimReward();
