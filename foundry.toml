@@ -4,7 +4,7 @@ out = "out"
 libs = ["lib"]
 
 [invariant]
-runs = 1
+runs = 64
 depth = 500
 fail_on_revert = true
 

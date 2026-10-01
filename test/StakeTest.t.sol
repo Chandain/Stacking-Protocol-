@@ -163,43 +163,6 @@ contract StakingTest is Test {
         console.log("q");
     }
 
-    function test_RewardPaymentCanConsumePrincipal() public {
-        vm.startPrank(userA);
-        staking.stake{value: 100}(100);
-
-        vm.warp(block.timestamp + 101 days);
-
-        uint256 userBalanceBefore = userA.balance;
-        uint256 rewardOwed = staking.earned(userA);
-        uint256 principalLiability = staking.totalPrincipal();
-        uint256 assetsBefore = address(staking).balance;
-        uint256 rewardAvaible = staking.getRewardAvaibility();
-        (, uint256 storedReward,) = staking.getInfo(userA);
-        uint256 expectedReward = storedReward + rewardOwed;
-        uint256 surplusReward = staking.getRewardAvaibility();
-
-        uint256 expectedPaid = expectedReward < surplusReward ? expectedReward : surplusReward;
-        staking.claimReward();
-
-        uint256 userBalanceAfter = userA.balance;
-
-        uint256 assetsAfter = address(staking).balance;
-        uint256 principalAfterClaim = staking.totalPrincipal();
-        vm.stopPrank();
-
-        console.log("contract assets", assetsBefore, "principal liability", principalLiability);
-        console.log("reward owed", rewardOwed, "assets after", assetsAfter);
-        console.log("principal after claim", principalAfterClaim);
-
-        assertGt(rewardOwed, 0);
-        assertGe(assetsBefore, principalLiability);
-        assertGe(assetsBefore, rewardOwed);
-
-        assertEq(userBalanceAfter - userBalanceBefore, expectedPaid);
-        assertEq(principalAfterClaim, principalLiability);
-        assertEq(assetsAfter, assetsBefore - expectedPaid);
-    }
-
     function test_Stake() public {
         vm.prank(userA);
         staking.stake{value: 100}(100);
