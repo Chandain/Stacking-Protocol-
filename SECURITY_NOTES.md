@@ -1,43 +1,30 @@
 # Staking Protocol — Security Notes
 
-
-1. Unfunded Reward Liability
-
-**Description**
-
-Reward liability increases with stake size and elapsed time, but the protocol does not guarantee sufficient funding for accrued rewards.
-
-**Impact**
-
-The contract may become unable to pay accrued rewards. Depending on the available balance and withdrawal logic, reward payments may also consume ETH required to repay users' principal.
-
-**Evidence**
-
-`test_ClaimRevertsWhenRewardExceedsAvailableAssets()` demonstrates that a reward claim fails when the reward owed exceeds the contract's available ETH balance.
-
-The principal-consumption scenario is covered separately by `test_RewardPaymentCanConsumePrincipal()` in finding 3.
-
-**Recommendation**
-
-Protect outstanding principal when paying rewards. Establish a sustainable reward-funding mechanism and ensure the protocol does not promise rewards beyond its intended funding capacity.
-
-2. Withdrawal Depends on Recipient Accepting ETH
+6. Contract Still can Pay Unpaid Reward
 
 **Description**
-
-If the recipient is a smart contract that rejects incoming ETH, `unstake()` reverts because the principal transfer fails.
+Testing Whether Contract can Pay the Unpaid Reward or Not, After User Unstake Contract can Pay an Unpaid/Stored Reward After Contract Have a Balance. Contract Will Pay with the Ability Contrat if Contracat can Pay 50 Contract Will Pay 50 and Not gonna Touch User Principal
 
 **Impact**
-
-Affected smart-contract wallets may be unable to withdraw their principal through the current withdrawal path. The failed transaction preserves the original stake and accounting state.
+Contract can Pay the Unpaid Reward, But Still the Transfer Mechanism Not Solve the Funding Problem, Contract Must Have a Real Source of Funding
 
 **Evidence**
+StakeTest.t.sol: `test_ExitedUserCanClaimDebtAfterStagedFunding()` Normal Test
+StakingFuzzTest.t.sol: `testFuzz_PartialClaimWithBalanceLessThenLiability()` 
+FuzzTets with Random Funding Amount & Stake Amount
 
-`testStakingAmountStillSameAfterUnstake()` confirms that a rejected ETH transfer causes `unstake(40)` to revert with `TF`, leaving both the user's stake and `totalPrincipal` unchanged at `100`.
+5. Testing If Contract Stored Unpaid Reward
 
-**Recommendation**
+**Description**
+Created 2 Test Normal Test & Invariant Test, 2 test Pass With no Error
 
-Consider an alternative withdrawal recipient through a function such as `unstakeTo(amount, recipient)`. Only the position owner should be authorized to initiate withdrawal. Apply CEI and appropriate reentrancy protection.
+**Evidence**
+`test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation` & `invariant_RewardCannotUsePrincipal`
+
+4. Fix Reward Payment Can Consume Principal
+
+**Evidence**
+`test_RewardPaymentCannotConsumePrincipal()`, this function prove if Reward that User Accumulated more than Reward Availability, contract would not use User Principal to Pay the Reward
 
 3. Reward Payment Can Consume Principal
 
@@ -68,5 +55,47 @@ Use a pre-funded reward budget. Reserve rewards already allocated as user entitl
 Partial payment limited to assets above principal, Protects principal if the reserve is enforced, Unpaid reward debt can continue growing without funding when accrual remains unbounded, Rejected as the final solution
 
 Pre-funded reward budget with reserved allocations and bounded accrual, Reserves principal separately from reward obligations, Every new reward entitlement consumes available unallocated funding
+
+2. Withdrawal Depends on Recipient Accepting ETH
+
+**Description**
+
+If the recipient is a smart contract that rejects incoming ETH, `unstake()` reverts because the principal transfer fails.
+
+**Impact**
+
+Affected smart-contract wallets may be unable to withdraw their principal through the current withdrawal path. The failed transaction preserves the original stake and accounting state.
+
+**Evidence**
+
+`testStakingAmountStillSameAfterUnstake()` confirms that a rejected ETH transfer causes `unstake(40)` to revert with `TF`, leaving both the user's stake and `totalPrincipal` unchanged at `100`.
+
+**Recommendation**
+
+Consider an alternative withdrawal recipient through a function such as `unstakeTo(amount, recipient)`. Only the position owner should be authorized to initiate withdrawal. Apply CEI and appropriate reentrancy protection.
+
+1. Unfunded Reward Liability
+
+**Description**
+
+Reward liability increases with stake size and elapsed time, but the protocol does not guarantee sufficient funding for accrued rewards.
+
+**Impact**
+
+The contract may become unable to pay accrued rewards. Depending on the available balance and withdrawal logic, reward payments may also consume ETH required to repay users' principal.
+
+**Evidence**
+
+`test_ClaimRevertsWhenRewardExceedsAvailableAssets()` demonstrates that a reward claim fails when the reward owed exceeds the contract's available ETH balance.
+
+The principal-consumption scenario is covered separately by `test_RewardPaymentCanConsumePrincipal()` in finding 3.
+
+**Recommendation**
+
+Protect outstanding principal when paying rewards. Establish a sustainable reward-funding mechanism and ensure the protocol does not promise rewards beyond its intended funding capacity.
+
+
+
+
 
 

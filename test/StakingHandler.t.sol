@@ -47,43 +47,24 @@ contract StakingHandler is Test {
         address actor = getActor(actorSeed);
 
         uint256 balanceBefore = address(staking).balance;
-        console.log("balanceBefore", balanceBefore);
-
-        // console.log("totalStakeBefore", staking.totalStake());
-
         uint256 pendingReward = staking.earned(actor);
-        // console.log("pendingReward", pendingReward);
-
         (, uint256 storedReward,) = staking.getInfo(actor);
-        // console.log("storedReward", storedReward);
-
         uint256 expectedReward = storedReward + pendingReward;
-        // console.log("expectedReward", expectedReward);
+        uint256 surplusReward = staking.getRewardAvaibility();
 
+        uint256 expectedPaid = expectedReward < surplusReward ? expectedReward : surplusReward;
         if (expectedReward == 0) return;
 
         vm.prank(actor);
+        if (surplusReward == 0) {
+            vm.expectRevert(bytes("ICB"));
+        }
         staking.claimReward();
 
         uint256 balanceAfter = address(staking).balance;
-        // console.log("balanceAfter", balanceAfter);
-
-        // uint256 rewardAfter = staking.earned(actor);
-        // console.log("rewardAfter", rewardAfter);
-
         uint256 rewardActuallyPaid = balanceBefore - balanceAfter;
-        console.log("Claim", rewardActuallyPaid);
-        // console.log("rewardActuallyPaid", rewardActuallyPaid);
 
-        // ghost_totalRewardsPaid += rewardActuallyPaid;
-        // console.log("totalStake after", staking.totalStake());
-
-        // console.log("Deposited", ghost_totalDeposited);
-        // console.log("PrincipalOut", ghost_totalPrincipalOut);
-
-        // console.log("-------");
-
-        assertEq(rewardActuallyPaid, expectedReward);
+        assertEq(rewardActuallyPaid, expectedPaid);
     }
 
     function unstake(uint256 _amount, uint256 actorSeed) external {

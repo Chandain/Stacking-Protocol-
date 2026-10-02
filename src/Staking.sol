@@ -75,12 +75,20 @@ contract Staking {
         uint256 consumedTime = period * feePeriod;
 
         uint256 amount = (info.stake * rewardRate * period) + info.reward;
+        console.log("amount: ", amount);
 
         require(amount > 0, "IB");
 
+        uint256 rewardAvaible = getRewardAvaibility();
+        require(rewardAvaible > 0, "ICB");
 
+        if (amount > rewardAvaible) {
+            info.reward = amount - rewardAvaible;
+            amount = rewardAvaible;
+        } else {
+            info.reward = 0;
+        }
 
-        info.reward = 0;
         info.lastUpdate += consumedTime;
 
         (bool success,) = payable(msg.sender).call{value: amount}("");
@@ -96,9 +104,6 @@ contract Staking {
         info.reward += earned(msg.sender);
         info.stake -= amount;
 
-        //kondisi salah
-        // info.stake -= amount;
-        // info.reward += earned(msg.sender);
         totalPrincipal -= amount;
         info.lastUpdate = block.timestamp;
 

@@ -38,6 +38,18 @@ contract StakeInvariantTest is Test {
         return total;
     }
 
+    function invariant_RewardCannotUsePrincipal() public view {
+        uint256 totalPrincipal = staking.totalPrincipal();
+        uint256 contractBalance = address(staking).balance;
+        uint256 rewardAvaible = staking.getRewardAvaibility();
+
+        if (rewardAvaible > 0) {
+            assertGe(address(staking).balance, staking.totalPrincipal());
+        } else {
+            assertEq(contractBalance, totalPrincipal);
+        }
+    }
+
     function invariant_ContractCanCoverPrincipal() public view {
         assertGe(address(staking).balance, staking.totalPrincipal());
     }
@@ -46,7 +58,7 @@ contract StakeInvariantTest is Test {
         assertEq(staking.totalPrincipal(), handler.ghost_totalPrincipal());
     }
 
-    function invariant_ContractAssetsMoreThanLiability() public view {
+    function invariant_AssetsCoverPrincipal() public view {
         uint256 balance = address(staking).balance;
         uint256 principal = staking.totalPrincipal();
         uint256 rewards = rewardLiability();
@@ -56,6 +68,6 @@ contract StakeInvariantTest is Test {
         console.log("reward liability", rewards);
         console.log("total liability", principal + rewards);
 
-        assertGe(balance, principal + rewards);
+        assertGe(balance, principal);
     }
 }

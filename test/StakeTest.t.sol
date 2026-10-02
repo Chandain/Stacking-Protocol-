@@ -7,6 +7,7 @@ import {Staking} from "../src/Staking.sol";
 contract StakingTest is Test {
     address userA = makeAddr("userA");
     address userB = makeAddr("userB");
+    address funders = makeAddr("funders");
     Staking public staking;
 
     uint256 period = 1 days;
@@ -17,6 +18,7 @@ contract StakingTest is Test {
         staking = new Staking(period, 1);
         vm.deal(userA, 1000);
         vm.deal(userB, 1000);
+        vm.deal(funders, 1000);
         vm.deal(address(staking), 10000);
     }
 
@@ -38,38 +40,202 @@ contract StakingTest is Test {
         console.log(result);
     }
 
+    function warp(uint256 time) public {
+        vm.warp(block.timestamp + time);
+    }
 
+    function transferFund(uint256 amount) public {
+        vm.prank(funders);
+        (bool success,) = address(staking).call{value: amount}("");
+        require(success, "Transfer failed");
+    }
 
-    function test_RewardPaymentCanConsumePrincipal() public {
+    function test_ExitedUserCanClaimDebtAfterStagedFunding() public {
+        vm.deal(address(staking), 70);
+        uint256 balanceBeforeUserA = userA.balance;
+        vm.prank(userA);
+        staking.stake{value: 100}(100);
+
+        vm.prank(userB);
+        staking.stake{value: 100}(100);
+
+        warp(1 days);
+
+        (uint256 principalBeforeUserB,,) = staking.getInfo(userB);
+//      -----------------------------------------------------------------
+
+        vm.startPrank(userA);
+        uint256 avaible = staking.getRewardAvaibility();
+        uint256 owed = staking.earned(userA);
+        {
+            uint256 balanceBeforeClaim = userA.balance;
+            staking.claimReward();
+
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            assertEq(userA.balance - balanceBeforeClaim + rewardStored, owed);
+        }
+
+        staking.unstake(100);
+
+        (, uint256 rewardAfterExit,) = staking.getInfo(userA);
+        assertEq(rewardAfterExit, owed - avaible);
+        vm.stopPrank();
+
+//      -----------------------------------------------------------------
+        transferFund(20);
+
+        {
+            uint256 balanceBeforeClaim = userA.balance;
+            vm.prank(userA);
+            staking.claimReward();
+
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            assertEq(userA.balance - balanceBeforeClaim + rewardStored, owed - avaible);
+        }
+
+//      -----------------------------------------------------------------
+        transferFund(10);
+
+        {
+            (, uint256 rewardBeforeClaim,) = staking.getInfo(userA);
+            uint256 balanceBeforeClaim = userA.balance;
+            vm.prank(userA);
+            staking.claimReward();
+
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            assertEq(userA.balance - balanceBeforeClaim + rewardStored, rewardBeforeClaim);
+        }
+
+//      -----------------------------------------------------------------
+        uint256 balanceAfterUserA = userA.balance;
+
+        (uint256 principalAfterUserB,,) = staking.getInfo(userB);
+
+        assertEq(principalBeforeUserB, principalAfterUserB);
+        assertEq(balanceAfterUserA - balanceBeforeUserA, owed);
+    }
+
+    function test_ThreeConditionRewardAvaible() public {
+        vm.startPrank(userB);
+        staking.stake{value: 100}(100);
+        warp(10 days);
+
+        //owed < available
+        staking.unstake(20);
+        warp(1 days);
+
+        uint256 userBalance = userB.balance;
+        (, uint256 rewardStored,) = staking.getInfo(userB);
+        uint256 owed = staking.earned(userB) + rewardStored;
+        console.log("owed: ", owed);
+        uint256 avaible = staking.getRewardAvaibility();
+        console.log("avaible: ", avaible);
+        assertLt(owed, avaible);
+
+        staking.claimReward();
+
+        uint256 userBalanceAfter = userB.balance;
+        assertEq(userBalanceAfter - userBalance, owed);
+
+        //owed == available
+        warp(80 days);
+        staking.unstake(20);
+        warp(42 days);
+
+        uint256 userBalance2 = userB.balance;
+        (, uint256 rewardStored2,) = staking.getInfo(userB);
+        uint256 owed2 = staking.earned(userB) + rewardStored2;
+        uint256 avaible2 = staking.getRewardAvaibility();
+        assertEq(avaible2, owed2);
+
+        staking.claimReward();
+        uint256 userBalanceAfter2 = userB.balance;
+        assertEq(userBalanceAfter2 - userBalance2, owed2);
+
+        vm.deal(address(staking), 1200);
+        //owed > available
+        warp(30 days);
+
+        uint256 userBalance3 = userB.balance;
+        (, uint256 rewardStored3,) = staking.getInfo(userB);
+        uint256 owed3 = staking.earned(userB) + rewardStored3;
+        uint256 avaible3 = staking.getRewardAvaibility();
+        assertGe(owed3, avaible3);
+
+        staking.claimReward();
+        (, uint256 unpaidReward,) = staking.getInfo(userB);
+        uint256 userBalanceAfter3 = userB.balance;
+
+        assertEq(userBalanceAfter3 - userBalance3, avaible3);
+        assertEq(owed3 - avaible3, unpaidReward);
+
+        vm.stopPrank();
+    }
+
+    function test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation() public {
+        vm.startPrank(userA);
+
+        staking.stake{value: 100}(100);
+        vm.warp(block.timestamp + 20 days);
+
+        staking.unstake(20);
+
+        vm.warp(block.timestamp + 100 days);
+
+        (, uint256 rewardStoredBeforeClaim,) = staking.getInfo(userA);
+        uint256 rewardAccured = staking.earned(userA);
+        uint256 rewardAvaible = staking.getRewardAvaibility();
+        uint256 rewardUnpaid = (rewardAccured + rewardStoredBeforeClaim) - rewardAvaible;
+
+        uint256 totalPrincipalBeforeClaim = staking.totalPrincipal();
+
+        staking.claimReward();
+
+        (, uint256 rewardStored,) = staking.getInfo(userA);
+
+        vm.warp(block.timestamp + 20 days);
+
+        vm.expectRevert(bytes("ICB"));
+        staking.claimReward();
+
+        uint256 totalPrincipalAfterClaim = staking.totalPrincipal();
+
+        vm.stopPrank();
+
+        assertEq(rewardUnpaid, rewardStored);
+        assertEq(totalPrincipalAfterClaim, totalPrincipalBeforeClaim);
+        assertGe(address(staking).balance, totalPrincipalAfterClaim);
+    }
+
+    function test_RewardPaymentCannotConsumePrincipal() public {
         vm.startPrank(userA);
         staking.stake{value: 100}(100);
 
         vm.warp(block.timestamp + 101 days);
 
         uint256 userBalanceBefore = userA.balance;
-        uint256 rewardOwed = staking.earned(userA);
-        uint256 principalLiability = staking.totalPrincipal();
-        uint256 assetsBefore = address(staking).balance;
+        uint256 principalBeforeClaim = staking.totalPrincipal();
+        uint256 availible = staking.getRewardAvaibility();
 
         staking.claimReward();
 
         uint256 userBalanceAfter = userA.balance;
         uint256 assetsAfter = address(staking).balance;
         uint256 principalAfterClaim = staking.totalPrincipal();
+
+        vm.warp(block.timestamp + 10 days);
+
+        vm.expectRevert(bytes("ICB"));
+        staking.claimReward();
+
         vm.stopPrank();
 
-        console.log("contract assets", assetsBefore, "principal liability", principalLiability);
-        console.log("reward owed", rewardOwed, "assets after", assetsAfter);
-        console.log("principal after claim", principalAfterClaim);
+        assertEq(principalBeforeClaim, principalAfterClaim);
+        assertEq(assetsAfter, principalBeforeClaim);
+        assertEq(userBalanceBefore + availible, userBalanceAfter);
 
-        assertGt(rewardOwed, 0);
-        assertGe(assetsBefore, principalLiability);
-        assertGe(assetsBefore, rewardOwed);
-
-        assertEq(userBalanceAfter - userBalanceBefore, rewardOwed);
-        assertEq(principalAfterClaim, principalLiability);
-        assertEq(assetsAfter, assetsBefore - rewardOwed);
-        assertLt(assetsAfter, principalAfterClaim);
+        assertGe(assetsAfter, principalAfterClaim);
+        console.log("q");
     }
 
     function test_Stake() public {
@@ -81,7 +247,7 @@ contract StakingTest is Test {
         actor = actorSeed % 2 == 0 ? userA : userB;
     }
 
-    function test_ClaimRevertsWhenRewardExceedsAvailableAssets() public {
+    function test_ClaimStoredRemainsFundToUserInfoWhenFundNotEnough() public {
         vm.startPrank(userA);
 
         staking.stake{value: 100}(100);
@@ -94,12 +260,17 @@ contract StakingTest is Test {
         uint256 expectedReward = pendingReward + storedReward;
         uint256 availableAssets = address(staking).balance;
 
+        uint256 rewardAvaible = staking.getRewardAvaibility();
+        uint256 rewardStored = expectedReward - rewardAvaible;
+
         assertGt(expectedReward, availableAssets, "Test setup: reward must exceed available assets");
 
-        vm.expectRevert(bytes("TF"));
         staking.claimReward();
 
+        (, uint256 storedRewardAfterClaim,) = staking.getInfo(userA);
         vm.stopPrank();
+
+        assertEq(storedRewardAfterClaim, rewardStored);
     }
 
     function testAmountUnstakeIsZero() public {
