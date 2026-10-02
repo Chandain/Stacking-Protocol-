@@ -67,43 +67,44 @@ contract StakingTest is Test {
         vm.startPrank(userA);
         uint256 avaible = staking.getRewardAvaibility();
         uint256 owed = staking.earned(userA);
-        uint256 balanceBeforeClaim1 = userA.balance;
-        
-        staking.claimReward();
-        
-        (, uint256 rewardStored1,) = staking.getInfo(userA);
-        uint256 balanceAfterClaim1 = userA.balance;
-        assertEq(balanceAfterClaim1 - balanceBeforeClaim1 + rewardStored1, avaible);
+        {
+            uint256 balanceBeforeClaim = userA.balance;
+            staking.claimReward();
+
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            assertEq(userA.balance - balanceBeforeClaim + rewardStored, owed);
+        }
 
         staking.unstake(100);
 
-        (, uint256 rewardStored,) = staking.getInfo(userA);
-        assertEq(rewardStored, owed - avaible);
+        (, uint256 rewardAfterExit,) = staking.getInfo(userA);
+        assertEq(rewardAfterExit, owed - avaible);
         vm.stopPrank();
 
 //      -----------------------------------------------------------------
         transferFund(20);
 
-        uint256 balanceBeforeClaim2 = userA.balance;
+        {
+            uint256 balanceBeforeClaim = userA.balance;
+            vm.prank(userA);
+            staking.claimReward();
 
-        vm.prank(userA);
-        staking.claimReward();
-        
-        (, uint256 rewardStored2,) = staking.getInfo(userA);
-        uint256 balanceAfterClaim2 = userA.balance;
-        assertEq(balanceAfterClaim2 - balanceBeforeClaim2 + rewardStored2, avaible);
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            assertEq(userA.balance - balanceBeforeClaim + rewardStored, owed - avaible);
+        }
 
 //      -----------------------------------------------------------------
         transferFund(10);
 
-        uint256 balanceBeforeClaim3 = userA.balance;
+        {
+            (, uint256 rewardBeforeClaim,) = staking.getInfo(userA);
+            uint256 balanceBeforeClaim = userA.balance;
+            vm.prank(userA);
+            staking.claimReward();
 
-        vm.prank(userA);
-        staking.claimReward();
-        
-        (, uint256 rewardStored3,) = staking.getInfo(userA);
-        uint256 balanceAfterClaim3 = userA.balance;
-        assertEq(balanceAfterClaim3 - balanceBeforeClaim3 + rewardStored3, avaible);
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            assertEq(userA.balance - balanceBeforeClaim + rewardStored, rewardBeforeClaim);
+        }
 
 //      -----------------------------------------------------------------
         uint256 balanceAfterUserA = userA.balance;

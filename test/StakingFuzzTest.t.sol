@@ -44,7 +44,7 @@ contract StakingFuzzTest is Test {
         }
 
         warp(1 days);
-        uint256 rewardUserA = staking.earned(userA);
+        uint256 rewardUserA = stakeAmountA;
         uint256 initialFunding = bound(_fundingSeed, 1, rewardUserA - 1);
         transferFund(initialFunding);
 
