@@ -9,11 +9,13 @@ contract StakingFuzzTest is Test {
 
     address userA = makeAddr("userA");
     address userB = makeAddr("userB");
+    address funders = makeAddr("funders");
 
     function setUp() public {
         staking = new Staking(1 days, 1);
         vm.deal(userA, 1000);
         vm.deal(userB, 1000);
+        vm.deal(funders, 1000);
         vm.deal(address(staking), 10000);
     }
 
@@ -21,45 +23,83 @@ contract StakingFuzzTest is Test {
         vm.warp(block.timestamp + time);
     }
 
+    function transferFund(uint256 amount) public {
+        vm.prank(funders);
+        (bool success,) = address(staking).call{value: amount}("");
+        require(success, "Transfer failed");
+    }
+
     function testFuzz_PartialClaimWithBalanceLessThenLiability(uint256 _stakeAmount, uint256 _fundingSeed) public {
         vm.deal(address(staking), 0);
+        uint256 balanceBeforeUserA = userA.balance;
         uint256 stakeAmountA = bound(_stakeAmount, 20, 100);
-        uint256 stakeAmountB = bound(_stakeAmount, 20, 200);
 
         vm.prank(userA);
         staking.stake{value: stakeAmountA}(stakeAmountA);
 
-        vm.prank(userB);
-        staking.stake{value: stakeAmountB}(stakeAmountB);
+        {
+            uint256 stakeAmountB = bound(_stakeAmount, 20, 200);
+            vm.prank(userB);
+            staking.stake{value: stakeAmountB}(stakeAmountB);
+        }
 
         warp(1 days);
         uint256 rewardUserA = staking.earned(userA);
         uint256 initialFunding = bound(_fundingSeed, 1, rewardUserA - 1);
-        vm.deal(address(staking), address(staking).balance + initialFunding);
-        console.log("contract balance: ", address(staking).balance);
+        transferFund(initialFunding);
 
-        vm.startPrank(userA);
-        staking.claimReward();
+        {
+            uint256 balanceBeforeClaim = userA.balance;
+            vm.prank(userA);
+            staking.claimReward();
 
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            uint256 paid = userA.balance - balanceBeforeClaim;
+            assertEq(paid, initialFunding);
+            assertEq(paid + rewardStored, rewardUserA);
+            assertGe(address(staking).balance, staking.totalPrincipal());
+        }
+
+        vm.prank(userA);
         staking.unstake(stakeAmountA);
-        (uint256 amountStakedAfter,,) = staking.getInfo(userA);
+        {
+            (uint256 amountStakedAfter,,) = staking.getInfo(userA);
+            assertEq(amountStakedAfter, 0);
+        }
 
         uint256 remainingDebt = rewardUserA - initialFunding;
         uint256 funding2 = bound(_fundingSeed, 1, remainingDebt);
-        vm.deal(address(staking), address(staking).balance + funding2);
-        staking.claimReward();
+        transferFund(funding2);
+
+        {
+            uint256 balanceBeforeClaim = userA.balance;
+            vm.prank(userA);
+            staking.claimReward();
+
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            uint256 paid = userA.balance - balanceBeforeClaim;
+            assertEq(paid, funding2);
+            assertEq(paid + rewardStored, remainingDebt);
+            assertGe(address(staking).balance, staking.totalPrincipal());
+        }
 
         uint256 funding3 = remainingDebt - funding2;
-        vm.deal(address(staking), address(staking).balance + funding3);
-        if (funding3 == 0) {
-            vm.expectRevert(bytes("IB"));
+        transferFund(funding3);
+        {
+            uint256 balanceBeforeClaim = userA.balance;
+            if (funding3 == 0) {
+                vm.expectRevert(bytes("IB"));
+            }
+            vm.prank(userA);
+            staking.claimReward();
+
+            (, uint256 rewardStored,) = staking.getInfo(userA);
+            assertEq(userA.balance - balanceBeforeClaim, funding3);
+            assertEq(rewardStored, 0);
         }
-        staking.claimReward();
 
-        vm.stopPrank();
-
+        assertEq(userA.balance - balanceBeforeUserA, rewardUserA);
         assertEq(initialFunding + funding2 + funding3, rewardUserA);
-        assertEq(amountStakedAfter, 0);
         assertGe(address(staking).balance, staking.totalPrincipal());
     }
 

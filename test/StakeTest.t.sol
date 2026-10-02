@@ -7,6 +7,7 @@ import {Staking} from "../src/Staking.sol";
 contract StakingTest is Test {
     address userA = makeAddr("userA");
     address userB = makeAddr("userB");
+    address funders = makeAddr("funders");
     Staking public staking;
 
     uint256 period = 1 days;
@@ -17,6 +18,7 @@ contract StakingTest is Test {
         staking = new Staking(period, 1);
         vm.deal(userA, 1000);
         vm.deal(userB, 1000);
+        vm.deal(funders, 1000);
         vm.deal(address(staking), 10000);
     }
 
@@ -42,6 +44,12 @@ contract StakingTest is Test {
         vm.warp(block.timestamp + time);
     }
 
+    function transferFund(uint256 amount) public {
+        vm.prank(funders);
+        (bool success,) = address(staking).call{value: amount}("");
+        require(success, "Transfer failed");
+    }
+
     function test_ExitedUserCanClaimDebtAfterStagedFunding() public {
         vm.deal(address(staking), 70);
         uint256 balanceBeforeUserA = userA.balance;
@@ -54,25 +62,51 @@ contract StakingTest is Test {
         warp(1 days);
 
         (uint256 principalBeforeUserB,,) = staking.getInfo(userB);
+//      -----------------------------------------------------------------
 
         vm.startPrank(userA);
         uint256 avaible = staking.getRewardAvaibility();
         uint256 owed = staking.earned(userA);
+        uint256 balanceBeforeClaim1 = userA.balance;
+        
         staking.claimReward();
+        
+        (, uint256 rewardStored1,) = staking.getInfo(userA);
+        uint256 balanceAfterClaim1 = userA.balance;
+        assertEq(balanceAfterClaim1 - balanceBeforeClaim1 + rewardStored1, avaible);
 
         staking.unstake(100);
 
         (, uint256 rewardStored,) = staking.getInfo(userA);
         assertEq(rewardStored, owed - avaible);
-
-        vm.deal(address(staking), address(staking).balance + 20);
-        staking.claimReward();
-
-        vm.deal(address(staking), address(staking).balance + 10);
-        staking.claimReward();
-
-        uint256 balanceAfterUserA = userA.balance;
         vm.stopPrank();
+
+//      -----------------------------------------------------------------
+        transferFund(20);
+
+        uint256 balanceBeforeClaim2 = userA.balance;
+
+        vm.prank(userA);
+        staking.claimReward();
+        
+        (, uint256 rewardStored2,) = staking.getInfo(userA);
+        uint256 balanceAfterClaim2 = userA.balance;
+        assertEq(balanceAfterClaim2 - balanceBeforeClaim2 + rewardStored2, avaible);
+
+//      -----------------------------------------------------------------
+        transferFund(10);
+
+        uint256 balanceBeforeClaim3 = userA.balance;
+
+        vm.prank(userA);
+        staking.claimReward();
+        
+        (, uint256 rewardStored3,) = staking.getInfo(userA);
+        uint256 balanceAfterClaim3 = userA.balance;
+        assertEq(balanceAfterClaim3 - balanceBeforeClaim3 + rewardStored3, avaible);
+
+//      -----------------------------------------------------------------
+        uint256 balanceAfterUserA = userA.balance;
 
         (uint256 principalAfterUserB,,) = staking.getInfo(userB);
 

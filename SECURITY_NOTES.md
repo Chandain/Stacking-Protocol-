@@ -10,7 +10,7 @@ Contract can Pay the Unpaid Reward, But Still the Transfer Mechanism Not Solve t
 
 **Evidence**
 StakeTest.t.sol: `test_ExitedUserCanClaimDebtAfterStagedFunding()` Normal Test
-StakingFuzzTets.t.sol: `testFuzz_PartialClaimWithBalanceLessThenLiability()` 
+StakingFuzzTest.t.sol: `testFuzz_PartialClaimWithBalanceLessThenLiability()` 
 FuzzTets with Random Funding Amount & Stake Amount
 
 5. Testing If Contract Stored Unpaid Reward
