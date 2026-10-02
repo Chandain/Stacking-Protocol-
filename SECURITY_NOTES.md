@@ -1,17 +1,30 @@
 # Staking Protocol — Security Notes
 
+6. Contract Still can Pay Unpaid Reward
+
+**Description**
+Testing Whether Contract can Pay the Unpaid Reward or Not, After User Unstake Contract can Pay an Unpaid/Stored Reward After Contract Have a Balance. Contract Will Pay with the Ability Contrat if Contracat can Pay 50 Contract Will Pay 50 and Not gonna Touch User Principal
+
+**Impact**
+Contract can Pay the Unpaid Reward, But Still the Transfer Mechanism Not Solve the Funding Problem, Contract Must Have a Real Source of Funding
+
+**Evidence**
+StakeTest.t.sol: `test_ExitedUserCanClaimDebtAfterStagedFunding()` Normal Test
+StakingFuzzTets.t.sol: `testFuzz_PartialClaimWithBalanceLessThenLiability()` 
+FuzzTets with Random Funding Amount & Stake Amount
+
 5. Testing If Contract Stored Unpaid Reward
 
 **Description**
 Created 2 Test Normal Test & Invariant Test, 2 test Pass With no Error
 
-**Evidance**
+**Evidence**
 `test_IfBalanceNotEnoughUnpaidRewardStoredInUserInformation` & `invariant_RewardCannotUsePrincipal`
 
 4. Fix Reward Payment Can Consume Principal
 
 **Evidence**
-`test_RewardPaymentCannotConsumePrincipal()`, this function prove if Reward that User Accumulated more than Reward Avaibility, contract would not use User Principal to Pay the Reward
+`test_RewardPaymentCannotConsumePrincipal()`, this function prove if Reward that User Accumulated more than Reward Availability, contract would not use User Principal to Pay the Reward
 
 3. Reward Payment Can Consume Principal
 

@@ -75,6 +75,7 @@ contract Staking {
         uint256 consumedTime = period * feePeriod;
 
         uint256 amount = (info.stake * rewardRate * period) + info.reward;
+        console.log("amount: ", amount);
 
         require(amount > 0, "IB");
 

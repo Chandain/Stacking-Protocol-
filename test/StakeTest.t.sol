@@ -42,6 +42,44 @@ contract StakingTest is Test {
         vm.warp(block.timestamp + time);
     }
 
+    function test_ExitedUserCanClaimDebtAfterStagedFunding() public {
+        vm.deal(address(staking), 70);
+        uint256 balanceBeforeUserA = userA.balance;
+        vm.prank(userA);
+        staking.stake{value: 100}(100);
+
+        vm.prank(userB);
+        staking.stake{value: 100}(100);
+
+        warp(1 days);
+
+        (uint256 principalBeforeUserB,,) = staking.getInfo(userB);
+
+        vm.startPrank(userA);
+        uint256 avaible = staking.getRewardAvaibility();
+        uint256 owed = staking.earned(userA);
+        staking.claimReward();
+
+        staking.unstake(100);
+
+        (, uint256 rewardStored,) = staking.getInfo(userA);
+        assertEq(rewardStored, owed - avaible);
+
+        vm.deal(address(staking), address(staking).balance + 20);
+        staking.claimReward();
+
+        vm.deal(address(staking), address(staking).balance + 10);
+        staking.claimReward();
+
+        uint256 balanceAfterUserA = userA.balance;
+        vm.stopPrank();
+
+        (uint256 principalAfterUserB,,) = staking.getInfo(userB);
+
+        assertEq(principalBeforeUserB, principalAfterUserB);
+        assertEq(balanceAfterUserA - balanceBeforeUserA, owed);
+    }
+
     function test_ThreeConditionRewardAvaible() public {
         vm.startPrank(userB);
         staking.stake{value: 100}(100);
@@ -54,7 +92,9 @@ contract StakingTest is Test {
         uint256 userBalance = userB.balance;
         (, uint256 rewardStored,) = staking.getInfo(userB);
         uint256 owed = staking.earned(userB) + rewardStored;
+        console.log("owed: ", owed);
         uint256 avaible = staking.getRewardAvaibility();
+        console.log("avaible: ", avaible);
         assertLt(owed, avaible);
 
         staking.claimReward();
